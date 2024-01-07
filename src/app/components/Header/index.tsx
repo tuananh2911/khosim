@@ -1,8 +1,6 @@
 "use client"
 import { Menu, Layout, Input, Button } from 'antd';
 import Link from 'next/link';
-import { useState } from 'react';
-import DropdownFilter from '../Dropdown';
 import { SearchOutlined } from '@ant-design/icons';
 const { Header } = Layout;
 function HeaderComponent() {
@@ -12,13 +10,13 @@ function HeaderComponent() {
         console.log('Search value:', value);
     };
     return (
-        <Header style={{ padding: 0, height: 'auto' }}>
+        <Header style={{ padding: 0, height: 'auto', width: 'auto' }}>
             <div className="header__main">
-                <Header style={{ height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
+                <Header style={{ height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'space-evenly' }}>
 
                     <div style={{ display: 'flex', width: '500px', height: '32px', marginLeft: '8px' }}>
                         <Link className="logo" href="/">
-                            <img src="https://cdn.sims.vn/khosim/upload/files/logo.png" alt="logo" width="139" height="33" />
+                            <img src="https://cdn.sims.vn/khosim/upload/files/logo.png" alt="logo" width="139" height="36" />
                         </Link>
                         <Input.Search
                             placeholder="Nhập số sim cần tìm"
@@ -31,9 +29,9 @@ function HeaderComponent() {
                     </nav>
                 </Header>
                 <div className="container">
-                    <div className="row" >
-                        <Menu mode="horizontal" style={{ padding: '0 0', height: '60px', backgroundColor: 'rgb(254,209,0)' }}>
-                            <Menu.Item key="home">
+                    <div className="row" style={{}} >
+                        <Menu mode="horizontal" style={{ padding: '0 0', height: '60px', backgroundColor: 'rgb(254,209,0)', display: 'flex' }}>
+                            <Menu.Item key="home" style={{ marginLeft: '36vh' }}>
                                 <Link href="/" style={{ fontWeight: 'bold', fontSize: '16px' }}>TRANG CHỦ</Link>
                             </Menu.Item>
                             <Menu.Item key="upsim" style={{ fontWeight: 'bold', fontSize: '16px' }}>
@@ -44,7 +42,6 @@ function HeaderComponent() {
                             </Menu.Item>
                         </Menu>
                     </div>
-                    <DropdownFilter />
                 </div>
             </div >
         </Header >

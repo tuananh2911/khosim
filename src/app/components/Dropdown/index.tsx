@@ -9,18 +9,19 @@ const DropdownFilter = () => {
     const [selectedPrefixes, setSelectedPrefixes] = useState([]);
     const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
     const [selectedAvoids, setSelectedAvoids] = useState([]);
+    const [selectedSims, setSelectedSims] = useState([]);
     const [pointValue, setPointValue] = useState('');
     const [sumValue, setSumValue] = useState('');
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const networks = [
-        { id: 1, title: 'Viettel' },
-        { id: 2, title: 'Mobifone' },
-        { id: 3, title: 'Vinaphone' },
-        { id: 4, title: 'Vietnamobile' },
-        { id: 5, title: 'Gmobile' },
-        { id: 6, title: 'iTelecom' },
-        { id: 7, title: 'Wintel' },
+        { id: '1', title: 'Viettel' },
+        { id: '2', title: 'Mobifone' },
+        { id: '3', title: 'Vinaphone' },
+        { id: '4', title: 'Vietnamobile' },
+        { id: '5', title: 'Gmobile' },
+        { id: '6', title: 'iTelecom' },
+        { id: '7', title: 'Wintel' },
     ];
 
     const prefixes = [
@@ -45,19 +46,28 @@ const DropdownFilter = () => {
         { id: '500000-0', title: 'Trên 500 triệu' },
     ];
 
+    const sims = [
+        { id: '16', title: 'Sim Lục Quý' },
+        { id: '17', title: 'Sim Ngũ Quý' },
+        { id: '53', title: 'Sim Tứ Quý' },
+        { id: '19', title: 'Sim Tam Hoa Kép' },
+        { id: '30', title: 'Sim Lục Quý Giữa' },
+        { id: '31', title: 'Sim Ngũ Quý Giữa' },
+    ];
+
     const avoids = [
-        { id: 0, title: '0' },
-        { id: 1, title: '1' },
-        { id: 2, title: '2' },
-        { id: 3, title: '3' },
-        { id: 4, title: '4' },
-        { id: 5, title: '5' },
-        { id: 6, title: '6' },
-        { id: 7, title: '7' },
-        { id: 8, title: '8' },
-        { id: 9, title: '9' },
-        { id: 49, title: '49' },
-        { id: 53, title: '53' },
+        { id: '0', title: '0' },
+        { id: '1', title: '1' },
+        { id: '2', title: '2' },
+        { id: '3', title: '3' },
+        { id: '4', title: '4' },
+        { id: '5', title: '5' },
+        { id: '6', title: '6' },
+        { id: '7', title: '7' },
+        { id: '8', title: '8' },
+        { id: '9', title: '9' },
+        { id: '49', title: '49' },
+        { id: '53', title: '53' },
     ];
 
     const handleNetworkSelect = (network: any) => {
@@ -84,6 +94,12 @@ const DropdownFilter = () => {
         console.log('Selected avoids:', avoid);
     };
 
+    const handleSimsSelect = (avoid: any) => {
+        setSelectedSims(avoid);
+        // Perform actions based on the selected avoids
+        console.log('Selected avoids:', avoid);
+    };
+
     const handlePointChange = (event: any) => {
         setPointValue(event.target.value);
         // Perform actions based on the point value
@@ -101,7 +117,13 @@ const DropdownFilter = () => {
     };
 
     const handleClear = () => {
-        // Reset all selections
+        setSelectedNetworks([]);
+        setSelectedPrefixes([]);
+        setSelectedPriceRanges([]);
+        setSelectedAvoids([]);
+        setSelectedSims([]);
+        setPointValue('');
+        setSumValue('');
     };
 
     // Hàm xử lý hiển thị form
@@ -146,6 +168,24 @@ const DropdownFilter = () => {
                         {priceRanges.map((range) => (
                             <Option key={range.id} value={range.id}>
                                 {range.title}
+                            </Option>
+                        ))}
+                    </Select>
+                </div>
+                <hr />
+
+                <p>Loại Sim</p>
+                <div className="mb-4">
+                    <Select
+                        style={{ width: '100%' }}
+                        value={selectedSims}
+                        onChange={setSelectedSims}
+                        mode="multiple"
+                        placeholder="Loại Sim"
+                    >
+                        {sims.map((sim) => (
+                            <Option key={sim.id} value={sim.id}>
+                                {sim.title}
                             </Option>
                         ))}
                     </Select>
@@ -220,20 +260,21 @@ const DropdownFilter = () => {
     );
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center', backgroundColor: '#f9f9f9' }}>
+
+        <div style={{ display: 'flex', alignItems: 'center', backgroundColor: '#f9f9f9', padding: '8px 8px' }}>
             <Dropdown overlay={menu} trigger={['click']}>
                 <Button style={{ backgroundColor: 'rgb(254, 209, 0)' }} onClick={showModal}>
                     <FilterOutlined />BỘ LỌC <DownOutlined />
                 </Button>
             </Dropdown>
-            <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
-                <div className="mb-4" style={{ width: '20vh' }}>
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
+                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
                     <Select
                         style={{ width: '100%' }}
                         value={selectedNetworks}
                         onChange={setSelectedNetworks}
                         mode="multiple"
-                        placeholder="Chọn nhà mạng"
+                        placeholder="Nhà mạng"
                     >
                         {networks.map((network) => (
                             <Option key={network.id} value={network.id}>
@@ -242,13 +283,13 @@ const DropdownFilter = () => {
                         ))}
                     </Select>
                 </div>
-                <div className="mb-4" style={{ width: '20vh' }}>
+                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
                     <Select
                         style={{ width: '100%' }}
                         value={selectedPriceRanges}
                         onChange={setSelectedPriceRanges}
                         mode="multiple"
-                        placeholder="Sim theo giá"
+                        placeholder="Khoảng giá"
                     >
                         {priceRanges.map((range) => (
                             <Option key={range.id} value={range.id}>
@@ -257,7 +298,22 @@ const DropdownFilter = () => {
                         ))}
                     </Select>
                 </div>
-                <div className="mb-4" style={{ width: '20vh' }}>
+                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
+                    <Select
+                        style={{ width: '100%' }}
+                        value={selectedSims}
+                        onChange={setSelectedSims}
+                        mode="multiple"
+                        placeholder="Loại Sim"
+                    >
+                        {sims.map((sim) => (
+                            <Option key={sim.id} value={sim.id}>
+                                {sim.title}
+                            </Option>
+                        ))}
+                    </Select>
+                </div>
+                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
                     <Select
                         style={{ width: '100%' }}
                         value={selectedPrefixes}
@@ -272,13 +328,13 @@ const DropdownFilter = () => {
                         ))}
                     </Select>
                 </div>
-                <div className="mb-4" style={{ width: '20vh' }}>
+                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
                     <Select
                         style={{ width: '100%' }}
                         value={selectedAvoids}
                         onChange={handleAvoidsSelect}
                         mode="multiple"
-                        placeholder="Số tránh"
+                        placeholder="Tránh số"
                     >
                         {avoids.map((avoid) => (
                             <Option key={avoid.id} value={avoid.id}>
@@ -287,19 +343,19 @@ const DropdownFilter = () => {
                         ))}
                     </Select>
                 </div>
-                <div className="mb-4" style={{ width: '20vh' }}>
-                    <Input
+                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
 
+                    <Input
                         type="number"
                         min={0}
                         max={80}
                         value={pointValue}
                         onChange={handlePointChange}
-                        placeholder="Tổng điểm: < 81"
+                        placeholder="Tổng điểm: ..."
                     />
 
                 </div>
-                <div style={{ width: '20vh' }}>
+                <div style={{ width: '20vh', padding: '8px 8px' }}>
                     <Input
                         className="w-1/2"
                         type="number"
@@ -307,11 +363,11 @@ const DropdownFilter = () => {
                         max={10}
                         value={sumValue}
                         onChange={handleSumChange}
-                        placeholder="Tổng nút: 1-10"
+                        placeholder="Tổng nút: ..."
                     />
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 
