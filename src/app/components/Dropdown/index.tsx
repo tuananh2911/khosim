@@ -14,20 +14,32 @@ const DropdownFilter = () => {
         { id: 1, title: 'Viettel' },
         { id: 2, title: 'Mobifone' },
         { id: 3, title: 'Vinaphone' },
-        // Add more network options
+        { id: 4, title: 'Vietnamobile' },
+        { id: 5, title: 'Gmobile' },
+        { id: 6, title: 'iTelecom' },
+        { id: 7, title: 'Wintel' },
     ];
 
     const prefixes = [
         { id: '09', title: '09' },
         { id: '08', title: '08' },
         { id: '07', title: '07' },
-        // Add more prefix options
+        { id: '05', title: '05' },
+        { id: '03', title: '03' },
+        { id: '02', title: '02' },
     ];
 
     const priceRanges = [
         { id: '0-500', title: 'Dưới 500 nghìn' },
         { id: '500-1000', title: 'Từ 500 - 1 triệu' },
-        // Add more price range options
+        { id: '1000-3000', title: 'Từ 500 - 1 triệu' },
+        { id: '3000-5000', title: 'Từ 500 - 1 triệu' },
+        { id: '5000-10000', title: 'Từ 500 - 1 triệu' },
+        { id: '10000-50000', title: 'Từ 500 - 1 triệu' },
+        { id: '50000-100000', title: 'Từ 500 - 1 triệu' },
+        { id: '100000-200000', title: 'Từ 500 - 1 triệu' },
+        { id: '200000-500000', title: 'Từ 500 - 1 triệu' },
+        { id: '500000-0', title: 'Từ 500 - 1 triệu' },
     ];
 
     const avoids = [
