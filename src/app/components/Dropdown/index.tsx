@@ -137,12 +137,14 @@ const DropdownFilter = () => {
     };
 
     const menu = (
-        <Menu>
-            <div className="w-full p-4">
+        <Menu style={{
+            overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'
+        }}>
+            <div className="w-full p-4" >
                 <p>Chọn nhà mạng</p>
                 <div className="mb-4">
                     <Select
-                        style={{ width: '100%' }}
+                        style={{ width: '100%', maxWidth: '200px', overflowX: 'auto' }}
                         value={selectedNetworks}
                         onChange={setSelectedNetworks}
                         mode="multiple"
@@ -256,7 +258,7 @@ const DropdownFilter = () => {
                     </Button>
                 </div>
             </div>
-        </Menu>
+        </Menu >
     );
 
     return (
