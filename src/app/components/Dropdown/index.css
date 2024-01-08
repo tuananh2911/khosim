@@ -1,0 +1,9 @@
+.select {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 34px;
+    max-width: 100%;
+    display: inline-block;
+    overflow-y: auto;
+}
