@@ -1,0 +1,21 @@
+.continuous-text {
+    animation: moveText 10s linear infinite;
+    /* Sử dụng animation có tên là 'moveText' trong 2 giây, lặp vô hạn */
+}
+
+
+.modified-item::after {
+    border: none !important;
+}
+
+@keyframes moveText {
+    0% {
+        transform: translateX(100%);
+        /* Bắt đầu từ vị trí ban đầu */
+    }
+
+    100% {
+        transform: translateX(0);
+        /* Di chuyển về phải 100% chiều rộng của phần tử */
+    }
+}

@@ -1,18 +1,30 @@
 "use client"
 import React, { useState } from 'react';
 import { Select, Input, Dropdown, Button, Menu, Modal } from 'antd';
+import { Space } from 'antd';
 import { SearchOutlined, CloseCircleOutlined, DownOutlined, FilterOutlined } from '@ant-design/icons';
-
+import type { SelectProps } from 'antd';
+import "./index.css";
 const { Option } = Select;
+
+interface ItemProps {
+    label: string;
+    value: string;
+}
+const options: ItemProps[] = [];
+
+for (let i = 10; i < 36; i++) {
+    const value = i.toString(36) + i;
+    options.push({
+        label: `Long Label: ${value}`,
+        value,
+    });
+}
+
 const DropdownFilter = () => {
-    const [selectedNetworks, setSelectedNetworks] = useState([]);
-    const [selectedPrefixes, setSelectedPrefixes] = useState([]);
-    const [selectedPriceRanges, setSelectedPriceRanges] = useState([]);
-    const [selectedAvoids, setSelectedAvoids] = useState([]);
-    const [selectedSims, setSelectedSims] = useState([]);
-    const [pointValue, setPointValue] = useState('');
-    const [sumValue, setSumValue] = useState('');
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [pointValue, setPointValue] = useState<number | ''>('');
+    const [sumValue, setSumValue] = useState<number | ''>('');
+    const [modalVisible, setModalVisible] = useState(false);
 
     const networks = [
         { id: '1', title: 'Viettel' },
@@ -69,47 +81,110 @@ const DropdownFilter = () => {
         { id: '49', title: '49' },
         { id: '53', title: '53' },
     ];
+    const networksOptions = networks.map((network) => ({
+        label: network.title,
+        value: network.id,
+    }));
 
-    const handleNetworkSelect = (network: any) => {
-        setSelectedNetworks(network);
-        // Perform actions based on the selected network
-        console.log('Selected network:', network);
+    const prefixesOptions = prefixes.map((prefix) => ({
+        label: prefix.title,
+        value: prefix.id,
+    }));
+
+    const priceRangesOptions = priceRanges.map((range) => ({
+        label: range.title,
+        value: range.id,
+    }));
+
+    const simsOptions = sims.map((sim) => ({
+        label: sim.title,
+        value: sim.id,
+    }));
+
+    const avoidsOptions = avoids.map((avoid) => ({
+        label: avoid.title,
+        value: avoid.id,
+    }));
+
+    const [value, setValue] = useState<string[]>([]);
+    const [value2, setValue2] = useState<string[]>([]);
+    const [value3, setValue3] = useState<string[]>([]);
+    const [value4, setValue4] = useState<string[]>([]);
+    const [value5, setValue5] = useState<string[]>([]);
+
+    const selectProps: SelectProps<string[]> = {
+        mode: 'multiple',
+        style: { width: '100%' },
+        value: value,
+        options: networksOptions,
+        onChange: (newValue: string[]) => {
+            setValue(newValue);
+        },
+        placeholder: 'Nhà mạng',
+        maxTagCount: 'responsive',
+        dropdownRender: (menu) => renderDropdown(menu, handleClear1),
+    };
+    const selectProps2: SelectProps<string[]> = {
+        mode: 'multiple',
+        style: { width: '100%' },
+        value: value2,
+        options: priceRangesOptions,
+        onChange: (newValue: string[]) => {
+            setValue2(newValue);
+        },
+        placeholder: 'Khoảng giá',
+        maxTagCount: 'responsive',
+        dropdownRender: (menu) => renderDropdown(menu, handleClear2),
+    };
+    const selectProps3: SelectProps<string[]> = {
+        mode: 'multiple',
+        style: { width: '100%' },
+        value: value3,
+        options: simsOptions,
+        onChange: (newValue: string[]) => {
+            setValue3(newValue);
+        },
+        placeholder: 'Loại Sim',
+        maxTagCount: 'responsive',
+        dropdownRender: (menu) => renderDropdown(menu, handleClear3),
+    };
+    const selectProps4: SelectProps<string[]> = {
+        mode: 'multiple',
+        style: { width: '100%' },
+        value: value4,
+        options: prefixesOptions,
+        onChange: (newValue: string[]) => {
+            setValue4(newValue);
+        },
+        placeholder: 'Đầu số',
+        maxTagCount: 'responsive',
+        dropdownRender: (menu) => renderDropdown(menu, handleClear4),
+    };
+    const selectProps5: SelectProps<string[]> = {
+        mode: 'multiple',
+        style: { width: '100%' },
+        value: value5,
+        options: avoidsOptions,
+        onChange: (newValue: string[]) => {
+            setValue5(newValue);
+        },
+        placeholder: 'Tránh số',
+        maxTagCount: 'responsive',
+        dropdownRender: (menu) => renderDropdown(menu, handleClear5),
     };
 
-    const handlePrefixSelect = (prefix: any) => {
-        setSelectedPrefixes(prefix);
-        // Perform actions based on the selected prefix
-        console.log('Selected prefix:', prefix);
+    const handlePointChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        if (value === '' || (parseInt(value) >= 0 && parseInt(value) <= 80)) {
+            setPointValue(value === '' ? '' : parseInt(value));
+        }
     };
 
-    const handlePriceRangeSelect = (range: any) => {
-        setSelectedPriceRanges(range);
-        // Perform actions based on the selected price range
-        console.log('Selected price range:', range);
-    };
-
-    const handleAvoidsSelect = (avoid: any) => {
-        setSelectedAvoids(avoid);
-        // Perform actions based on the selected avoids
-        console.log('Selected avoids:', avoid);
-    };
-
-    const handleSimsSelect = (avoid: any) => {
-        setSelectedSims(avoid);
-        // Perform actions based on the selected avoids
-        console.log('Selected avoids:', avoid);
-    };
-
-    const handlePointChange = (event: any) => {
-        setPointValue(event.target.value);
-        // Perform actions based on the point value
-        console.log('Point value:', event.target.value);
-    };
-
-    const handleSumChange = (event: any) => {
-        setSumValue(event.target.value);
-        // Perform actions based on the sum value
-        console.log('Sum value:', event.target.value);
+    const handleSumChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        if (value === '' || (parseInt(value) >= 1 && parseInt(value) <= 10)) {
+            setSumValue(value === '' ? '' : parseInt(value));
+        }
     };
 
     const handleSearch = () => {
@@ -117,114 +192,133 @@ const DropdownFilter = () => {
     };
 
     const handleClear = () => {
-        setSelectedNetworks([]);
-        setSelectedPrefixes([]);
-        setSelectedPriceRanges([]);
-        setSelectedAvoids([]);
-        setSelectedSims([]);
+        setValue([]);
+        setValue2([]);
+        setValue3([]);
+        setValue4([]);
+        setValue5([]);
         setPointValue('');
         setSumValue('');
     };
 
-    // Hàm xử lý hiển thị form
-    const showModal = () => {
-        setIsModalVisible(true);
-    };
+    const handleClear1 = () => {
+        setValue([]);
+    }
+    const handleClear2 = () => {
+        setValue2([]);
+    }
+    const handleClear3 = () => {
+        setValue3([]);
+    }
+    const handleClear4 = () => {
+        setValue4([]);
+    }
+    const handleClear5 = () => {
+        setValue5([]);
+    }
+    const handleClearPoint = () => {
+        setPointValue('');
+    }
+    const handleClearSum = () => {
+        setSumValue('');
+    }
 
-    // Hàm xử lý ẩn form
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
+    const renderDropdown = (menu: React.ReactNode, clearFunction: () => void) => (
+        <div>
+            {menu}
+            <div className="mt-4" style={{ display: 'flex', flexDirection: 'column' }}>
+                <Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>
+                    Xem kết quả
+                </Button>
+                <Button onClick={clearFunction}>
+                    <CloseCircleOutlined /> Bỏ chọn
+                </Button>
+            </div>
+        </div>
+    );
 
+    const dropdown1 = (
+        <Menu>
+            <div style={{ padding: '8px', display: 'flex', flexDirection: 'column' }}>
+                <Input
+                    type="number"
+                    min={0}
+                    max={80}
+                    onChange={handlePointChange}
+                    placeholder="Tổng điểm: <81"
+                    style={{ width: '200px', marginRight: '8px' }}
+                />
+                <div>
+                    <Button type="primary" onClick={handleSearch} style={{ marginRight: '8px' }}>
+                        Xem kết quả
+                    </Button>
+                    <Button onClick={handleClearPoint}>
+                        Bỏ chọn
+                    </Button>
+                </div>
+            </div>
+        </Menu>
+    );
+    const dropdown2 = (
+        <Menu>
+            <div style={{ padding: '8px', display: 'flex', flexDirection: 'column' }}>
+                <Input
+                    type="number"
+                    min={0}
+                    max={80}
+                    onChange={handleSumChange}
+                    placeholder="Tổng nút: 1-10"
+                    style={{ width: '200px', marginRight: '8px' }}
+                />
+                <div>
+                    <Button type="primary" onClick={handleSearch} style={{ marginRight: '8px' }}>
+                        Xem kết quả
+                    </Button>
+                    <Button onClick={handleClearSum}>
+                        Bỏ chọn
+                    </Button>
+                </div>
+            </div>
+        </Menu>
+    );
     const menu = (
         <Menu style={{
             overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'
         }}>
             <div className="w-full p-4" >
                 <p>Chọn nhà mạng</p>
-                <div className="mb-4">
-                    <Select
-                        style={{ width: '100%', maxWidth: '200px', overflowX: 'auto' }}
-                        value={selectedNetworks}
-                        onChange={setSelectedNetworks}
-                        mode="multiple"
-                        placeholder="Chọn nhà mạng"
-                    >
-                        {networks.map((network) => (
-                            <Option key={network.id} value={network.id}>
-                                {network.title}
-                            </Option>
-                        ))}
-                    </Select>
+                <div className="mb-4" >
+                    <Space direction="vertical" style={{ width: '20vh' }}>
+                        <Select {...selectProps} />
+                    </Space>
                 </div>
                 <hr />
                 <p>Sim theo giá</p>
                 <div className="mb-4">
-                    <Select
-                        style={{ width: '100%' }}
-                        value={selectedPriceRanges}
-                        onChange={setSelectedPriceRanges}
-                        mode="multiple"
-                        placeholder="Sim theo giá"
-                    >
-                        {priceRanges.map((range) => (
-                            <Option key={range.id} value={range.id}>
-                                {range.title}
-                            </Option>
-                        ))}
-                    </Select>
+                    <Space direction="vertical" style={{ width: '20vh' }}>
+                        <Select {...selectProps2} />
+                    </Space>
                 </div>
                 <hr />
-
                 <p>Loại Sim</p>
                 <div className="mb-4">
-                    <Select
-                        style={{ width: '100%' }}
-                        value={selectedSims}
-                        onChange={setSelectedSims}
-                        mode="multiple"
-                        placeholder="Loại Sim"
-                    >
-                        {sims.map((sim) => (
-                            <Option key={sim.id} value={sim.id}>
-                                {sim.title}
-                            </Option>
-                        ))}
-                    </Select>
+                    <Space direction="vertical" style={{ width: '20vh' }}>
+                        <Select {...selectProps3} />
+                    </Space>
                 </div>
                 <hr />
                 <p>Đầu số</p>
                 <div className="mb-4">
-                    <Select
-                        style={{ width: '100%' }}
-                        value={selectedPrefixes}
-                        onChange={setSelectedPrefixes}
-                        mode="multiple"
-                        placeholder="Đầu số"
-                    >
-                        {prefixes.map((prefix) => (
-                            <Option key={prefix.id} value={prefix.id}>
-                                {prefix.title}
-                            </Option>
-                        ))}
-                    </Select>
+                    <Space direction="vertical" style={{ width: '20vh' }}>
+                        <Select {...selectProps4} />
+                    </Space>
                 </div>
                 <hr />
-                <p>Số tránh</p>
+                <p>Tránh số</p>
                 <div className="mb-4">
-                    <Select
-                        style={{ width: '100%' }}
-                        value={selectedAvoids}
-                        onChange={handleAvoidsSelect}
-                        mode="multiple"
-                        placeholder="Số tránh"
-                    >
-                        {avoids.map((avoid) => (
-                            <Option key={avoid.id} value={avoid.id}>
-                                {avoid.title}
-                            </Option>
-                        ))}
-                    </Select>
+                    <Space direction="vertical" style={{ width: '20vh' }}>
+                        <Select {...selectProps5} />
+                    </Space>
                 </div>
                 <hr />
                 <p>Điểm & nút</p>
@@ -248,7 +342,6 @@ const DropdownFilter = () => {
                         placeholder="Tổng nút: 1-10"
                     />
                 </div>
-                {/* Buttons */}
                 <div className="mt-4 flex justify-between">
                     <Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>
                         Xem kết quả
@@ -262,111 +355,51 @@ const DropdownFilter = () => {
     );
 
     return (
-
         <div style={{ display: 'flex', alignItems: 'center', backgroundColor: '#f9f9f9', padding: '8px 8px' }}>
-            <Dropdown overlay={menu} trigger={['click']}>
-                <Button style={{ backgroundColor: 'rgb(254, 209, 0)' }} onClick={showModal}>
+            <Dropdown overlay={menu} trigger={['click']} placement="topLeft">
+                <Button style={{ backgroundColor: 'rgb(254, 209, 0)' }} >
                     <FilterOutlined />BỘ LỌC <DownOutlined />
                 </Button>
             </Dropdown>
-            <div style={{ width: '100%', display: 'flex', flexDirection: 'row', overflow: 'hidden' }}>
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
                 <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
-                    <Select
-                        style={{ width: '100%' }}
-                        value={selectedNetworks}
-                        onChange={setSelectedNetworks}
-                        mode="multiple"
-                        placeholder="Nhà mạng"
-                    >
-                        {networks.map((network) => (
-                            <Option key={network.id} value={network.id}>
-                                {network.title}
-                            </Option>
-                        ))}
-                    </Select>
+                    <Space direction="vertical" style={{ width: '20vh' }}>
+                        <Select {...selectProps} />
+                    </Space>
                 </div>
                 <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
-                    <Select
-                        style={{ width: '100%' }}
-                        value={selectedPriceRanges}
-                        onChange={setSelectedPriceRanges}
-                        mode="multiple"
-                        placeholder="Khoảng giá"
-                    >
-                        {priceRanges.map((range) => (
-                            <Option key={range.id} value={range.id}>
-                                {range.title}
-                            </Option>
-                        ))}
-                    </Select>
+                    <Space direction="vertical" style={{ width: '20vh' }}>
+                        <Select {...selectProps2} />
+                    </Space>
                 </div>
                 <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
-                    <Select
-                        style={{ width: '100%' }}
-                        value={selectedSims}
-                        onChange={setSelectedSims}
-                        mode="multiple"
-                        placeholder="Loại Sim"
-                    >
-                        {sims.map((sim) => (
-                            <Option key={sim.id} value={sim.id}>
-                                {sim.title}
-                            </Option>
-                        ))}
-                    </Select>
+                    <Space direction="vertical" style={{ width: '20vh' }}>
+                        <Select {...selectProps3} />
+                    </Space>
                 </div>
                 <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
-                    <Select
-                        style={{ width: '100%' }}
-                        value={selectedPrefixes}
-                        onChange={setSelectedPrefixes}
-                        mode="multiple"
-                        placeholder="Đầu số"
-                    >
-                        {prefixes.map((prefix) => (
-                            <Option key={prefix.id} value={prefix.id}>
-                                {prefix.title}
-                            </Option>
-                        ))}
-                    </Select>
+                    <Space direction="vertical" style={{ width: '20vh' }}>
+                        <Select {...selectProps4} />
+                    </Space>
                 </div>
                 <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
-                    <Select
-                        style={{ width: '100%' }}
-                        value={selectedAvoids}
-                        onChange={handleAvoidsSelect}
-                        mode="multiple"
-                        placeholder="Tránh số"
-                    >
-                        {avoids.map((avoid) => (
-                            <Option key={avoid.id} value={avoid.id}>
-                                {avoid.title}
-                            </Option>
-                        ))}
-                    </Select>
+                    <Space direction="vertical" style={{ width: '20vh' }}>
+                        <Select {...selectProps5} />
+                    </Space>
                 </div>
                 <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
-
-                    <Input
-                        type="number"
-                        min={0}
-                        max={80}
-                        value={pointValue}
-                        onChange={handlePointChange}
-                        placeholder="Tổng điểm: ..."
-                    />
-
+                    <Dropdown overlay={dropdown1} trigger={['click']}>
+                        <Button>
+                            Tổng điểm
+                        </Button>
+                    </Dropdown>
                 </div>
-                <div style={{ width: '20vh', padding: '8px 8px' }}>
-                    <Input
-                        className="w-1/2"
-                        type="number"
-                        min={1}
-                        max={10}
-                        value={sumValue}
-                        onChange={handleSumChange}
-                        placeholder="Tổng nút: ..."
-                    />
+                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
+                    <Dropdown overlay={dropdown2} trigger={['click']}>
+                        <Button>
+                            Tổng nút
+                        </Button>
+                    </Dropdown>
                 </div>
             </div>
         </div>
