@@ -50,8 +50,8 @@ function HeaderComponent() {
                                 <Menu.Item key="home" style={{ marginLeft: '30vh', lineHeight: '43px' }}>
                                     <Link href="/" style={{ fontWeight: 'bold', fontSize: '16px' }}>TRANG CHỦ</Link>
                                 </Menu.Item>
-                                <Menu.Item key="upsim" style={{ lineHeight: '43px' }}>
-                                    <Link href="/upsim" style={{ fontWeight: 'bold', fontSize: '16px' }}>UP SIM</Link>
+                                <Menu.Item key="muasim" style={{ lineHeight: '43px' }}>
+                                    <Link href="/muasim" style={{ fontWeight: 'bold', fontSize: '16px' }}>MUA SIM</Link>
                                 </Menu.Item>
                                 <Menu.Item key="lienhe" style={{ lineHeight: '43px' }}>
                                     <Link href="/lienhe" style={{ fontWeight: 'bold', fontSize: '16px' }}>LIÊN HỆ</Link>
