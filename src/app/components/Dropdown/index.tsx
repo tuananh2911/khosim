@@ -5,21 +5,6 @@ import { Space } from 'antd';
 import { SearchOutlined, CloseCircleOutlined, DownOutlined, FilterOutlined } from '@ant-design/icons';
 import type { SelectProps } from 'antd';
 import "./index.css";
-const { Option } = Select;
-
-interface ItemProps {
-    label: string;
-    value: string;
-}
-const options: ItemProps[] = [];
-
-for (let i = 10; i < 36; i++) {
-    const value = i.toString(36) + i;
-    options.push({
-        label: `Long Label: ${value}`,
-        value,
-    });
-}
 
 const DropdownFilter = () => {
     const [pointValue, setPointValue] = useState<number | ''>('');
@@ -281,6 +266,7 @@ const DropdownFilter = () => {
             </div>
         </Menu>
     );
+
     const menu = (
         <Menu style={{
             overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'
@@ -389,14 +375,14 @@ const DropdownFilter = () => {
                 </div>
                 <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
                     <Dropdown overlay={dropdown1} trigger={['click']}>
-                        <Button>
+                        <Button style={{ width: '19vh' }}>
                             Tổng điểm
                         </Button>
                     </Dropdown>
                 </div>
                 <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
                     <Dropdown overlay={dropdown2} trigger={['click']}>
-                        <Button>
+                        <Button style={{ width: '19vh' }}>
                             Tổng nút
                         </Button>
                     </Dropdown>
