@@ -17,7 +17,7 @@ function HeaderComponent() {
     };
     return (
         <>
-            <div style={{ width: '100%', position: 'relative', height: '250px', backgroundColor: '#9d2063', display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '100%', position: 'relative', height: '320px', backgroundColor: '#9d2063', display: 'flex', justifyContent: 'center' }}>
                 <div style={{ position: 'absolute', width: '100%', height: '100%' }}>
                     <Image
                         src="/background.jpg"

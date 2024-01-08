@@ -24,9 +24,9 @@ export default function RootLayout({
           <Layout className="layout">
             <Header />
             <div style={{ display: 'flex', backgroundColor: '#fff' }}>
-              <div style={{ marginLeft: '30vh', backgroundColor: '#fff' }}></div>
+              <div style={{ marginLeft: '16vh', backgroundColor: '#fff' }}></div>
               {children}
-              <div style={{ marginRight: '30vh', backgroundColor: '#fff' }}></div>
+              <div style={{ marginRight: '16vh', backgroundColor: '#fff' }}></div>
             </div>
           </Layout>
         </StyledComponentsRegistry>
