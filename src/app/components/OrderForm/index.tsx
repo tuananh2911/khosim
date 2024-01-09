@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import axios from 'axios';
-import { Radio, type RadioChangeEvent } from 'antd';
+import { Form, Input, Button, Radio, type RadioChangeEvent } from 'antd';
 interface City {
     Id: string;
     Name: string;
@@ -80,44 +80,108 @@ const OrderForm: React.FC = () => {
     };
     return (
         <div>
-
-            <Radio.Group options={plainOptions} onChange={onChange} value={gender} />
             <br />
+            
 
-            <input type="text" placeholder="Nhập tên" value={formData.name} onChange={(e) => handleInputChange('name', e.target.value)} className="form-control mb-3" />
-            <input type="text" placeholder="Nhập số điện thoại" value={formData.phoneNumber} onChange={(e) => handleInputChange('phoneNumber', e.target.value)} className="form-control mb-3" />
-            <select className="form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm" onChange={handleCityChange}>
-                <option value="" selected>Chọn tỉnh thành</option>
-                {cities.map(city => (
-                    <option key={city.Id} value={city.Id}>{city.Name}</option>
-                ))}
-            </select>
+            <Form
+                name="order"
+                layout="vertical"
+                style={{ width: '1000px', backgroundColor: '#fff', padding: '20px', borderRadius: '5px' }}
+            >
+                <Form.Item label="Họ và tên">
+                <Radio.Group>
+                        <Radio value="cash">Anh</Radio>
+                        <Radio value="card">Chị</Radio>
+                    </Radio.Group>
+                </Form.Item>
+                <Form.Item label="Họ và tên">
+                    <Input placeholder="Nhập họ và tên" />
+                </Form.Item>
+                <Form.Item label="Số điện thoại">
+                    <Input placeholder="Nhập số điện thoại" />
+                </Form.Item>
+                <Form.Item label="Địa chỉ">
+                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                        <select
+                            className="form-select form-select-sm mb-3 custom-select"
+                            id="city"
+                            aria-label=".form-select-sm"
+                            onChange={handleCityChange}
+                        >
+                            <option value="" disabled selected>
+                                Chọn tỉnh thành
+                            </option>
+                            {cities.map(city => (
+                                <option key={city.Id} value={city.Id}>
+                                    {city.Name}
+                                </option>
+                            ))}
+                        </select>
 
-            <select className="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm" onChange={handleDistrictChange}>
-                <option value="" selected>Chọn quận huyện</option>
-                {districts.map(district => (
-                    <option key={district.Id} value={district.Id}>{district.Name}</option>
-                ))}
-            </select>
+                        <select
+                            className="form-select form-select-sm mb-3 custom-select"
+                            id="district"
+                            aria-label=".form-select-sm"
+                            onChange={handleDistrictChange}
+                        >
+                            <option value="" disabled selected>
+                                Chọn quận huyện
+                            </option>
+                            {districts.map(district => (
+                                <option key={district.Id} value={district.Id}>
+                                    {district.Name}
+                                </option>
+                            ))}
+                        </select>
 
-            <select className="form-select form-select-sm" id="ward" aria-label=".form-select-sm">
-                <option value="" selected>Chọn phường xã</option>
-                {wards.map(ward => (
-                    <option key={ward.Id} value={ward.Id}>{ward.Name}</option>
-                ))}
-            </select>
-
-            <select value={formData.paymentMethod} onChange={(e) => handleInputChange('paymentMethod', e.target.value)} className="form-select form-select-sm mb-3">
-                <option value="">Chọn phương thức thanh toán</option>
-                <option value="cash">Tiền mặt</option>
-                <option value="card">Thẻ thanh toán</option>
-                {/* Add more options if needed */}
-            </select>
-
-            <p>Tổng tiền: {formData.totalAmount}</p>
-
-            {/* Buy Now button */}
-            <button onClick={handleBuyNow} className="btn btn-primary">Mua Ngay</button>
+                        <select
+                            className="form-select form-select-sm custom-select"
+                            id="ward"
+                            aria-label=".form-select-sm"
+                        >
+                            <option value="" disabled selected>
+                                Chọn phường xã
+                            </option>
+                            {wards.map(ward => (
+                                <option key={ward.Id} value={ward.Id}>
+                                    {ward.Name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <Input placeholder="Nhập địa chỉ" />
+                </Form.Item>
+                <Form.Item label="Phương thức thanh toán">
+                    <Radio.Group>
+                        <Radio value="cash">Tiền mặt</Radio>
+                        <Radio value="card">Thẻ</Radio>
+                    </Radio.Group>
+                </Form.Item>
+                <Form.Item label="Phương thức thanh toán">
+                    <p>Tổng tiền: {formData.totalAmount}</p>
+                </Form.Item>
+                
+                <Form.Item>
+                    {/* Apply additional styles to the Button component */}
+                    <Button
+                        onClick={handleBuyNow}
+                        type='primary'
+                        htmlType="submit"
+                        style={{
+                            width: '100%',
+                            height: '50px',
+                            fontSize: '16px',
+                            backgroundColor: '#1890ff', // Set the background color
+                            border: 'none', // Remove border
+                        }}
+                        // Customize hover effect
+                        // You can adjust the color or other properties as needed
+                        className="custom-button"
+                    >
+                        Đặt hàng
+                    </Button>
+                </Form.Item>
+            </Form>
         </div>
     );
 };
