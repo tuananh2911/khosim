@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { Select, Input, Dropdown, Button, Menu, Modal } from 'antd';
+import { Select, Input, Dropdown, Button, Menu, Modal, Tooltip } from 'antd';
 import { Space } from 'antd';
 import { SearchOutlined, CloseCircleOutlined, DownOutlined, FilterOutlined } from '@ant-design/icons';
 import type { SelectProps } from 'antd';
@@ -211,8 +211,8 @@ const DropdownFilter = () => {
     const renderDropdown = (menu: React.ReactNode, clearFunction: () => void) => (
         <div>
             {menu}
-            <div className="mt-4" style={{ display: 'flex', flexDirection: 'column' }}>
-                <Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <Button icon={<SearchOutlined />} onClick={handleSearch} style={{ backgroundColor: '#1677ff', color: 'white' }}>
                     Xem kết quả
                 </Button>
                 <Button onClick={clearFunction}>
@@ -234,7 +234,7 @@ const DropdownFilter = () => {
                     style={{ width: '200px', marginRight: '8px' }}
                 />
                 <div>
-                    <Button type="primary" onClick={handleSearch} style={{ marginRight: '8px' }}>
+                    <Button onClick={handleSearch} style={{ marginRight: '8px' }} style={{ backgroundColor: '#1677ff', color: 'white' }}>
                         Xem kết quả
                     </Button>
                     <Button onClick={handleClearPoint}>
@@ -256,7 +256,7 @@ const DropdownFilter = () => {
                     style={{ width: '200px', marginRight: '8px' }}
                 />
                 <div>
-                    <Button type="primary" onClick={handleSearch} style={{ marginRight: '8px' }}>
+                    <Button onClick={handleSearch} style={{ marginRight: '8px' }} style={{ backgroundColor: '#1677ff', color: 'white' }}>
                         Xem kết quả
                     </Button>
                     <Button onClick={handleClearSum}>
@@ -329,7 +329,7 @@ const DropdownFilter = () => {
                     />
                 </div>
                 <div className="mt-4 flex justify-between">
-                    <Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>
+                    <Button icon={<SearchOutlined />} onClick={handleSearch} style={{ backgroundColor: '#1677ff', color: 'white' }}>
                         Xem kết quả
                     </Button>
                     <Button onClick={handleClear}>
@@ -342,7 +342,7 @@ const DropdownFilter = () => {
 
     return (
         <div style={{ display: 'flex', alignItems: 'center', backgroundColor: '#f9f9f9', padding: '8px 8px' }}>
-            <Dropdown overlay={menu} trigger={['click']} placement="topLeft">
+            <Dropdown overlay={menu} trigger={['click']} placement="topLeft" >
                 <Button style={{ backgroundColor: 'rgb(254, 209, 0)' }} >
                     <FilterOutlined />BỘ LỌC <DownOutlined />
                 </Button>

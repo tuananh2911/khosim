@@ -40,9 +40,9 @@ function HeaderComponent() {
                                 onSearch={handleSearch}
                             />
                         </div>
-                        <nav className="col-right ps-0">
-                            <Link href="/login" rel="nofollow" data-relforced="true" style={{ color: 'white', fontSize: '16px' }}>Tài khoản</Link>
-                        </nav>
+                        <div>
+
+                        </div>
                     </Header>
                     <div className="container" style={{ height: '40px' }}>
                         <div className="row" style={{}} >
@@ -50,9 +50,9 @@ function HeaderComponent() {
                                 <Menu.Item key="home" style={{ marginLeft: '30vh', lineHeight: '43px' }}>
                                     <Link href="/" style={{ fontWeight: 'bold', fontSize: '16px' }}>TRANG CHỦ</Link>
                                 </Menu.Item>
-                                <Menu.Item key="muasim" style={{ lineHeight: '43px' }}>
-                                    <Link href="/muasim" style={{ fontWeight: 'bold', fontSize: '16px' }}>MUA SIM</Link>
-                                </Menu.Item>
+                                {/* <Menu.Item key="muasim" style={{ lineHeight: '43px' }}>
+                                    <Link href="/buy" style={{ fontWeight: 'bold', fontSize: '16px' }}>MUA SIM</Link>
+                                </Menu.Item> */}
                                 <Menu.Item key="lienhe" style={{ lineHeight: '43px' }}>
                                     <Link href="/lienhe" style={{ fontWeight: 'bold', fontSize: '16px' }}>LIÊN HỆ</Link>
                                 </Menu.Item>

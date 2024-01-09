@@ -1,5 +1,6 @@
 
-import BanSim from '@/app/components/BanSim/page';
+import { OrderForm } from '@/app/components';
+import BanSim from '@/app/components/BanSim';
 import DropdownFilter from '@/app/components/Dropdown';
 import MenuDropdown from '@/app/components/MenuDropdown';
 import React from 'react'
@@ -11,7 +12,12 @@ const SDT = (param: any) => {
             <DropdownFilter />
             <div style={{ display: 'flex' }}>
                 <MenuDropdown />
-                <BanSim />
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <BanSim />
+                    <OrderForm />
+                </div>
+
+
             </div>
         </div>
     )
