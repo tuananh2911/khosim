@@ -47,7 +47,7 @@ function HeaderComponent() {
                     <div className="container" style={{ height: '40px' }}>
                         <div className="row" style={{}} >
                             <Menu mode="horizontal" style={{ padding: '0 0', height: '44px', backgroundColor: 'rgb(254,209,0)', display: 'flex', alignItems: 'center', width: '100%' }}>
-                                <Menu.Item key="home" style={{ marginLeft: '30vh', lineHeight: '43px' }}>
+                                <Menu.Item key="home" style={{ marginLeft: '16vh', lineHeight: '43px' }}>
                                     <Link href="/" style={{ fontWeight: 'bold', fontSize: '16px' }}>TRANG CHỦ</Link>
                                 </Menu.Item>
                                 {/* <Menu.Item key="muasim" style={{ lineHeight: '43px' }}>
@@ -58,7 +58,7 @@ function HeaderComponent() {
                                 </Menu.Item>
                                 <Menu.Item key="chuchay" style={{ lineHeight: '43px', border: 'none', width: '1000px' }} className='modified-item'>
                                     <QueueAnim>
-                                        <div key="text" style={{ width: '50%' }} >
+                                        <div key="text" style={{ width: '80%' }} >
                                             <p className="continuous-text" style={{ color: 'red', fontWeight: 'bold', fontSize: '16px' }}>SIM RẺ - SIM ĐẸP - SIM SIÊU ĐẸP</p>
                                         </div>
                                     </QueueAnim>
