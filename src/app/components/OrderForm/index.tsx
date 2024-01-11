@@ -2,6 +2,10 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import axios from 'axios';
 import { Form, Input, Button, Radio, type RadioChangeEvent } from 'antd';
+import { Typography, Divider, Tag, Select } from 'antd';
+import Link from 'next/link';
+const { Option } = Select;
+const { Title, Paragraph, Text } = Typography;
 interface City {
     Id: string;
     Name: string;
@@ -48,9 +52,17 @@ const OrderForm: React.FC = () => {
         fetchData();
     }, []);
 
-    const handleCityChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        const selectedCityId = e.target.value;
-        const selectedCity = cities.find(city => city.Id === selectedCityId);
+    // const handleCityChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    //     const selectedCityId = e.target.value;
+    //     const selectedCity = cities.find(city => city.Id === selectedCityId);
+
+    //     if (selectedCity) {
+    //         setDistricts(selectedCity.Districts || []);
+    //         setWards([]); // Reset danh sách phường/xã khi chọn lại tỉnh/thành phố
+    //     }
+    // };
+    const handleCityChange = (value: string) => {
+        const selectedCity = cities.find(city => city.Id === value);
 
         if (selectedCity) {
             setDistricts(selectedCity.Districts || []);
@@ -58,14 +70,14 @@ const OrderForm: React.FC = () => {
         }
     };
 
-    const handleDistrictChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        const selectedDistrictId = e.target.value;
-        const selectedDistrict = districts.find(district => district.Id === selectedDistrictId);
+    const handleDistrictChange = (value: string) => {
+        const selectedDistrict = districts.find(district => district.Id === value);
 
         if (selectedDistrict) {
             setWards(selectedDistrict.Wards || []);
         }
     };
+
     const handleInputChange = (key: string, value: string) => {
         setFormData({
             ...formData,
@@ -79,28 +91,36 @@ const OrderForm: React.FC = () => {
         // Add logic to process the purchase or perform necessary actions
     };
     return (
-        <div>
-            <br />
-            
-
+        <div style={{ margin: '8px 0 8px 8px', padding: '20px', border: '1px solid #ccc', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
+            <div className="section-item__title">
+                <Title level={3}>THÔNG TIN KHÁCH HÀNG</Title>
+            </div>
+            <Divider />
             <Form
                 name="order"
                 layout="vertical"
-                style={{ width: '1000px', backgroundColor: '#fff', padding: '20px', borderRadius: '5px' }}
+                style={{ width: '1000px', backgroundColor: '#fff', padding: '0px 20px 20px 20px', borderRadius: '5px' }}
             >
-                <Form.Item label="Họ và tên">
                 <Radio.Group>
-                        <Radio value="cash">Anh</Radio>
-                        <Radio value="card">Chị</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                <Form.Item label="Họ và tên">
-                    <Input placeholder="Nhập họ và tên" />
-                </Form.Item>
-                <Form.Item label="Số điện thoại">
-                    <Input placeholder="Nhập số điện thoại" />
-                </Form.Item>
-                <Form.Item label="Địa chỉ">
+                    <Radio value="cash">Anh</Radio>
+                    <Radio value="card">Chị</Radio>
+                </Radio.Group>
+
+                <div style={{ display: 'flex' }}>
+                    <Input
+                        placeholder="Họ và Tên *"
+                        value={formData.name}
+                        onChange={(e) => handleInputChange('name', e.target.value)}
+                        className="form-control mb-3"
+                    />
+                    <Input
+                        placeholder="Số điện thoại *"
+                        value={formData.phoneNumber}
+                        onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
+                        className="form-control mb-3"
+                    />
+                </div>
+                {/* <Form.Item label="Địa chỉ">
                     <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                         <select
                             className="form-select form-select-sm mb-3 custom-select"
@@ -149,7 +169,53 @@ const OrderForm: React.FC = () => {
                             ))}
                         </select>
                     </div>
-                    <Input placeholder="Nhập địa chỉ" />
+                </Form.Item> */}
+                <Form.Item label="Địa chỉ">
+                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                        <Select
+                            className="form-select form-select-sm mb-3 custom-select"
+
+                            onChange={handleCityChange}
+                        >
+                            <Option value="" disabled>
+                                Chọn tỉnh thành
+                            </Option>
+                            {cities.map(city => (
+                                <Option key={city.Id} value={city.Id}>
+                                    {city.Name}
+                                </Option>
+                            ))}
+                        </Select>
+
+                        <Select
+                            className="form-select form-select-sm mb-3 custom-select"
+
+                            onChange={handleDistrictChange}
+                        >
+                            <Option value="" disabled>
+                                Chọn quận huyện
+                            </Option>
+                            {districts.map(district => (
+                                <Option key={district.Id} value={district.Id}>
+                                    {district.Name}
+                                </Option>
+                            ))}
+                        </Select>
+
+                        <Select
+                            className="form-select form-select-sm custom-select"
+                            defaultValue=""
+                        >
+                            <Option value="" disabled>
+                                Chọn phường xã
+                            </Option>
+                            {wards.map(ward => (
+                                <Option key={ward.Id} value={ward.Id}>
+                                    {ward.Name}
+                                </Option>
+                            ))}
+                        </Select>
+                    </div>
                 </Form.Item>
                 <Form.Item label="Phương thức thanh toán">
                     <Radio.Group>
@@ -160,7 +226,7 @@ const OrderForm: React.FC = () => {
                 <Form.Item label="Phương thức thanh toán">
                     <p>Tổng tiền: {formData.totalAmount}</p>
                 </Form.Item>
-                
+
                 <Form.Item>
                     {/* Apply additional styles to the Button component */}
                     <Button
