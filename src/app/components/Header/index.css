@@ -1,5 +1,5 @@
 .continuous-text {
-    animation: moveText 10s linear infinite;
+    animation: moveText 5s linear infinite;
     /* Sử dụng animation có tên là 'moveText' trong 2 giây, lặp vô hạn */
 }
 
@@ -7,7 +7,12 @@
 .modified-item::after {
     border: none !important;
 }
-
+/* ở mobile display none modified-item */
+@media (max-width: 768px) {
+    .modified-item {
+        display: none !important;
+    }
+}
 @keyframes moveText {
     0% {
         transform: translateX(100%);

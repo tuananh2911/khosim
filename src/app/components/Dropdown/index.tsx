@@ -234,7 +234,7 @@ const DropdownFilter = () => {
                     style={{ width: '200px', marginRight: '8px' }}
                 />
                 <div>
-                    <Button onClick={handleSearch} style={{ marginRight: '8px' }} style={{ backgroundColor: '#1677ff', color: 'white' }}>
+                    <Button onClick={handleSearch} style={{ backgroundColor: '#1677ff', color: 'white', marginRight: '8px' }}>
                         Xem kết quả
                     </Button>
                     <Button onClick={handleClearPoint}>
@@ -256,7 +256,7 @@ const DropdownFilter = () => {
                     style={{ width: '200px', marginRight: '8px' }}
                 />
                 <div>
-                    <Button onClick={handleSearch} style={{ marginRight: '8px' }} style={{ backgroundColor: '#1677ff', color: 'white' }}>
+                    <Button onClick={handleSearch} style={{ backgroundColor: '#1677ff', color: 'white', marginRight: '8px' }}>
                         Xem kết quả
                     </Button>
                     <Button onClick={handleClearSum}>
@@ -273,35 +273,35 @@ const DropdownFilter = () => {
         }}>
             <div className="w-full p-4" >
                 <p>Chọn nhà mạng</p>
-                <div className="mb-4" >
+                <div  >
                     <Space direction="vertical" style={{ width: '20vh' }}>
                         <Select {...selectProps} />
                     </Space>
                 </div>
                 <hr />
                 <p>Sim theo giá</p>
-                <div className="mb-4">
+                <div >
                     <Space direction="vertical" style={{ width: '20vh' }}>
                         <Select {...selectProps2} />
                     </Space>
                 </div>
                 <hr />
                 <p>Loại Sim</p>
-                <div className="mb-4">
+                <div >
                     <Space direction="vertical" style={{ width: '20vh' }}>
                         <Select {...selectProps3} />
                     </Space>
                 </div>
                 <hr />
                 <p>Đầu số</p>
-                <div className="mb-4">
+                <div >
                     <Space direction="vertical" style={{ width: '20vh' }}>
                         <Select {...selectProps4} />
                     </Space>
                 </div>
                 <hr />
                 <p>Tránh số</p>
-                <div className="mb-4">
+                <div >
                     <Space direction="vertical" style={{ width: '20vh' }}>
                         <Select {...selectProps5} />
                     </Space>
@@ -347,40 +347,41 @@ const DropdownFilter = () => {
                     <FilterOutlined />BỘ LỌC <DownOutlined />
                 </Button>
             </Dropdown>
-            <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
-                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'row', gap: "2px",
+                  }} className = "overflow-auto md:overflow-visible">
+                <div  style={{ width: '20vh', padding: '8px 8px' }}>
                     <Space direction="vertical" style={{ width: '20vh' }}>
                         <Select {...selectProps} />
                     </Space>
                 </div>
-                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
+                <div  style={{ width: '20vh', padding: '8px 8px' }}>
                     <Space direction="vertical" style={{ width: '20vh' }}>
                         <Select {...selectProps2} />
                     </Space>
                 </div>
-                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
+                <div  style={{ width: '20vh', padding: '8px 8px' }}>
                     <Space direction="vertical" style={{ width: '20vh' }}>
                         <Select {...selectProps3} />
                     </Space>
                 </div>
-                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
+                <div  style={{ width: '20vh', padding: '8px 8px' }}>
                     <Space direction="vertical" style={{ width: '20vh' }}>
                         <Select {...selectProps4} />
                     </Space>
                 </div>
-                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
+                <div  style={{ width: '20vh', padding: '8px 8px' }}>
                     <Space direction="vertical" style={{ width: '20vh' }}>
                         <Select {...selectProps5} />
                     </Space>
                 </div>
-                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
+                <div  style={{ width: '20vh', padding: '8px 8px' }}>
                     <Dropdown overlay={dropdown1} trigger={['click']}>
                         <Button style={{ width: '19vh' }}>
                             Tổng điểm
                         </Button>
                     </Dropdown>
                 </div>
-                <div className="mb-4" style={{ width: '20vh', padding: '8px 8px' }}>
+                <div  style={{ width: '20vh', padding: '8px 8px' }}>
                     <Dropdown overlay={dropdown2} trigger={['click']}>
                         <Button style={{ width: '19vh' }}>
                             Tổng nút

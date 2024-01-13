@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <Content>
         <DropdownFilter />
-        <div style={{ display: 'flex' }}>
+        <div className="flex flex-col md:flex-row ">
           <MenuDropdown />
           <TableSim />
         </div>

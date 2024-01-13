@@ -56,7 +56,7 @@ function HeaderComponent() {
                                 <Menu.Item key="lienhe" style={{ lineHeight: '43px' }}>
                                     <Link href="/lienhe" style={{ fontWeight: 'bold', fontSize: '16px' }}>LIÊN HỆ</Link>
                                 </Menu.Item>
-                                <Menu.Item key="chuchay" style={{ lineHeight: '43px', border: 'none', width: '1000px' }} className='modified-item'>
+                                <Menu.Item key="chuchay" style={{ lineHeight: '43px', border: 'none', width: '300px' }} className='modified-item block sm:hidden'>
                                     <QueueAnim>
                                         <div key="text" style={{ width: '80%' }} >
                                             <p className="continuous-text" style={{ color: 'red', fontWeight: 'bold', fontSize: '16px' }}>SIM RẺ - SIM ĐẸP - SIM SIÊU ĐẸP</p>

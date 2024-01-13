@@ -24,11 +24,7 @@ export default function RootLayout({
         <StyledComponentsRegistry>
           <Layout className="layout">
             <Header />
-            <div style={{ display: 'flex', backgroundColor: '#fff' }}>
-              <div style={{ marginLeft: '16vh', backgroundColor: '#fff' }}></div>
-              {children}
-              <div style={{ marginRight: '16vh', backgroundColor: '#fff' }}></div>
-            </div>
+            <div className="container">{children}</div>
             <hr />
             <div style={{ display: 'flex', backgroundColor: '#fff' }}>
               <div style={{ marginLeft: '16vh', backgroundColor: '#fff' }}></div>
