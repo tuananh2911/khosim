@@ -5,6 +5,8 @@ import Link from "next/link";
 import React from "react";
 import { Spin } from "antd";
 import Icons from "../Icons";
+import numberWithVND from "@/app/utils/numberwithvnd";
+import { formatPhoneNumber } from "@/app/utils/string";
 
 interface DataTypeSim {
   stt?: number;
@@ -21,10 +23,12 @@ const columns: ColumnsType<DataTypeSim> = [
   {
     title: "Số sim",
     dataIndex: "name",
+    render: (row) => formatPhoneNumber(row),
   },
   {
     title: "Giá bán",
     dataIndex: "price",
+    render: (row) => numberWithVND(row),
   },
   {
     title: "Điểm",
@@ -59,7 +63,25 @@ const data: DataTypeSim[] = [
     name: "0386105648",
     price: 1000000,
     point: 80,
-    supplier: "Viettel",
+    supplier: "Mobifone",
+  },
+  {
+    name: "0386105648",
+    price: 1000000,
+    point: 80,
+    supplier: "Vinaphone",
+  },
+  {
+    name: "0386105648",
+    price: 1000000,
+    point: 80,
+    supplier: "Vietnamobile",
+  },
+  {
+    name: "0386105648",
+    price: 1000000,
+    point: 80,
+    supplier: "Gmobile",
   },
 ];
 
@@ -74,14 +96,14 @@ const fetchData = () => {
       }));
 
       resolve(dataWithStt);
-    }, 1000);
+    }, 500);
   });
 };
 const ListDataMobile = (props: { data: DataTypeSim[]; loading: boolean }) => {
   const { data, loading } = props;
 
   return (
-    <div className="md:hidden">
+    <div className="md:hidden mx-1">
       {loading ? (
         <div className="flex justify-center">
           <Spin />
@@ -91,17 +113,25 @@ const ListDataMobile = (props: { data: DataTypeSim[]; loading: boolean }) => {
           {data.map((item, index) => {
             const avt =
               Icons[item.supplier.toLowerCase() as keyof typeof Icons];
-            console.log(avt);
+            const prefix = formatPhoneNumber(item.name).slice(0, 5);
+            const suffix = formatPhoneNumber(item.name).slice(5, 12);
             return (
-              <div key={index} className="flex">
+              <Link
+                href={`/buy/${item.name}`}
+                key={index}
+                className="flex items-center justify-between border bg-white rounded-md shadow-md p-2"
+              >
                 <div>
                   <Avatar src={avt.src} size={48} />
                 </div>
-                <div>
-                  <div>{item.name}</div>
-                  <div>{item.price}</div>
+                <div className="p-2">
+                  <div className="font-bold text-green-700">
+                    <span>{prefix}</span>
+                    <span className="text-red-700">{suffix}</span>
+                  </div>
+                  <div>{numberWithVND(item.price)}</div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

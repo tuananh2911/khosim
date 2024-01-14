@@ -99,14 +99,16 @@ const OrderForm: React.FC = () => {
             <Form
                 name="order"
                 layout="vertical"
-                style={{ width: '1000px', backgroundColor: '#fff', padding: '0px 20px 20px 20px', borderRadius: '5px' }}
+                style={{ backgroundColor: '#fff',padding: "20px" , borderRadius: '5px'}}
+
             >
-                <Radio.Group>
+                <div className = "p-4">
+                <Radio.Group className="mb-2">
                     <Radio value="cash">Anh</Radio>
                     <Radio value="card">Chị</Radio>
                 </Radio.Group>
 
-                <div style={{ display: 'flex' }}>
+                <div className = "flex flex-col md:flex-row gap-2">
                     <Input
                         placeholder="Họ và Tên *"
                         value={formData.name}
@@ -171,7 +173,7 @@ const OrderForm: React.FC = () => {
                     </div>
                 </Form.Item> */}
                 <Form.Item label="Địa chỉ">
-                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                    <div className = "flex flex-col md:flex-row items-center gap-2">
                         <Select
                             className="form-select form-select-sm mb-3 custom-select"
 
@@ -247,6 +249,7 @@ const OrderForm: React.FC = () => {
                         Đặt hàng
                     </Button>
                 </Form.Item>
+                </div>
             </Form>
         </div>
     );
