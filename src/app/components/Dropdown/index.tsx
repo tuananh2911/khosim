@@ -103,7 +103,6 @@ const DropdownFilter = () => {
   const [value5, setValue5] = useState<string[]>([]);
 
   const selectProps: SelectProps<string[]> = {
-    mode: "multiple",
     style: { width: "100%" },
     value: value,
     options: networksOptions,
@@ -115,7 +114,6 @@ const DropdownFilter = () => {
     dropdownRender: (menu) => renderDropdown(menu, handleClear1),
   };
   const selectProps2: SelectProps<string[]> = {
-    mode: "multiple",
     style: { width: "100%" },
     value: value2,
     options: priceRangesOptions,
@@ -127,7 +125,6 @@ const DropdownFilter = () => {
     dropdownRender: (menu) => renderDropdown(menu, handleClear2),
   };
   const selectProps3: SelectProps<string[]> = {
-    mode: "multiple",
     style: { width: "100%" },
     value: value3,
     options: simsOptions,
@@ -139,7 +136,6 @@ const DropdownFilter = () => {
     dropdownRender: (menu) => renderDropdown(menu, handleClear3),
   };
   const selectProps4: SelectProps<string[]> = {
-    mode: "multiple",
     style: { width: "100%" },
     value: value4,
     options: prefixesOptions,
@@ -151,7 +147,6 @@ const DropdownFilter = () => {
     dropdownRender: (menu) => renderDropdown(menu, handleClear4),
   };
   const selectProps5: SelectProps<string[]> = {
-    mode: "multiple",
     style: { width: "100%" },
     value: value5,
     options: avoidsOptions,

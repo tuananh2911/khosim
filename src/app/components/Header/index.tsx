@@ -7,6 +7,7 @@ import QueueAnim from "rc-queue-anim";
 import "./index.css";
 import { Fragment } from "react";
 import Image from "next/image";
+import {useInfoUser} from "@/hooks/useInfoUser";
 
 const { Text } = Typography;
 
@@ -15,6 +16,7 @@ function HeaderComponent() {
   const handleSearch = (value: string) => {
     console.log("Search value:", value);
   };
+  const {user} = useInfoUser()
   return (
     <>
       <div
@@ -49,12 +51,7 @@ function HeaderComponent() {
             }}
           >
             <div
-              style={{
-                display: "flex",
-                width: "500px",
-                height: "32px",
-                marginLeft: "8px",
-              }}
+              className = "container flex h-8 w-full justify-center"
             >
               <Link className="logo" href="/">
                 <img
@@ -65,6 +62,7 @@ function HeaderComponent() {
                 />
               </Link>
               <Input.Search
+                  className="block w-[250px]"
                 placeholder="Nhập số sim cần tìm"
                 enterButton={
                   <Button
@@ -75,6 +73,12 @@ function HeaderComponent() {
                 }
                 onSearch={handleSearch}
               />
+            <div className="w-[100px] flex items-center ml-2">
+                {
+                    user && user.isAdmin ? <Link className="text-white" href="/admin">Tải sim</Link> : <Link className="text-white"  href="/login">Đăng nhập</Link>
+                }
+            </div>
+
             </div>
             <div></div>
           </Header>

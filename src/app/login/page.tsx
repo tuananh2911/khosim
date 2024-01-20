@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
-import { Button, Form, Input } from "antd";
+import React, {useEffect, useState} from "react";
+import {Button, Form, Input, message} from "antd";
 import request from "@/api/request";
 import { useInfoUser } from "@/hooks/useInfoUser";
 
@@ -16,7 +16,9 @@ type FieldType = {
 
 const LoginPage = () => {
   const { setUser, user } = useInfoUser();
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const handleLogin = async (values: any) => {
+    setIsLoading(true)
     try {
       const res = await request.post("/user/login", {
         username: values.username,
@@ -24,10 +26,13 @@ const LoginPage = () => {
       });
       if (res.data.isAdmin) {
         setUser({ isAdmin: true });
+        message.success("Đăng nhập thành công")
       }
     } catch (err) {
       console.log(err);
+      message.success("Đăng nhập thất bại")
     }
+    setIsLoading(false)
   };
   useEffect(() => {
     if (user && user.isAdmin) window.location.href = "/admin";
@@ -58,7 +63,7 @@ const LoginPage = () => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" loading={isLoading}>
             Đăng nhập
           </Button>
         </Form.Item>
