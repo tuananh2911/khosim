@@ -7,6 +7,7 @@ import { Spin } from "antd";
 import Icons from "../Icons";
 import numberWithVND from "@/app/utils/numberwithvnd";
 import { formatPhoneNumber } from "@/app/utils/string";
+import request from "@/api/request";
 
 interface DataTypeSim {
   stt?: number;
@@ -143,6 +144,14 @@ const TableSim = () => {
   const [data, setData] = React.useState<DataTypeSim[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
 
+
+  // const fetchData = async () => {
+  //   try{
+  //     const res = await request.get("sims")
+  //   }catch(error){
+  //
+  //   }
+  // }
   React.useEffect(() => {
     fetchData().then((result) => {
       setData(result);

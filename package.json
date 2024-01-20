@@ -18,7 +18,8 @@
     "rc-queue-anim": "^2.0.0",
     "react": "^18",
     "react-dom": "^18",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/node": "^20",
