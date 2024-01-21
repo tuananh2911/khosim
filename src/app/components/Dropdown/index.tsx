@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import type { SelectProps } from "antd";
 import "./index.css";
+import { useRouter } from "next/navigation";
 
 const DropdownFilter = () => {
   const [pointValue, setPointValue] = useState<number | "">("");
@@ -17,13 +18,13 @@ const DropdownFilter = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const networks = [
-    { id: "1", title: "Viettel" },
-    { id: "2", title: "Mobifone" },
-    { id: "3", title: "Vinaphone" },
-    { id: "4", title: "Vietnamobile" },
-    { id: "5", title: "Gmobile" },
-    { id: "6", title: "iTelecom" },
-    { id: "7", title: "Wintel" },
+    { id: "Viettel", title: "Viettel" },
+    { id: "Mobifone", title: "Mobifone" },
+    { id: "Vinaphone", title: "Vinaphone" },
+    { id: "Vietnamobile", title: "Vietnamobile" },
+    { id: "Gmobile", title: "Gmobile" },
+    { id: "iTelecom", title: "iTelecom" },
+    { id: "Wintel", title: "Wintel" },
   ];
 
   const prefixes = [
@@ -36,25 +37,25 @@ const DropdownFilter = () => {
   ];
 
   const priceRanges = [
-    { id: "0-500", title: "Dưới 500 nghìn" },
-    { id: "500-1000", title: "Từ 500 - 1 triệu" },
-    { id: "1000-3000", title: "Từ 1 - 3 triệu" },
-    { id: "3000-5000", title: "Từ 3 - 5 triệu" },
-    { id: "5000-10000", title: "Từ 5 - 10 triệu" },
-    { id: "10000-50000", title: "Từ 10 - 50 triệu" },
-    { id: "50000-100000", title: "Từ 50 - 100 triệu" },
-    { id: "100000-200000", title: "Từ 100 - 200 triệu" },
-    { id: "200000-500000", title: "Từ 200 - 500 triệu" },
-    { id: "500000-0", title: "Trên 500 triệu" },
+    { id: "0-500000", title: "Dưới 500 nghìn" },
+    { id: "500000-1000000", title: "Từ 500 - 1 triệu" },
+    { id: "1000000-3000000", title: "Từ 1 - 3 triệu" },
+    { id: "3000000-5000000", title: "Từ 3 - 5 triệu" },
+    { id: "5000000-10000000", title: "Từ 5 - 10 triệu" },
+    { id: "10000000-50000000", title: "Từ 10 - 50 triệu" },
+    { id: "50000000-100000000", title: "Từ 50 - 100 triệu" },
+    { id: "100000000-200000000", title: "Từ 100 - 200 triệu" },
+    { id: "200000000-500000000", title: "Từ 200 - 500 triệu" },
+    { id: "500000000-0", title: "Trên 500 triệu" },
   ];
 
   const sims = [
-    { id: "16", title: "Sim Lục Quý" },
-    { id: "17", title: "Sim Ngũ Quý" },
-    { id: "53", title: "Sim Tứ Quý" },
-    { id: "19", title: "Sim Tam Hoa Kép" },
-    { id: "30", title: "Sim Lục Quý Giữa" },
-    { id: "31", title: "Sim Ngũ Quý Giữa" },
+    { id: "Lục Quý", title: "Lục Quý" },
+    { id: "Ngũ Quý", title: "Ngũ Quý" },
+    { id: "Tứ Quý", title: "Tứ Quý" },
+    { id: "Tam Hoa Kép", title: "Tam Hoa Kép" },
+    { id: "Lục Quý Giữa", title: "Lục Quý Giữa" },
+    { id: "Ngũ Quý Giữa", title: "Ngũ Quý Giữa" },
   ];
 
   const avoids = [
@@ -96,13 +97,15 @@ const DropdownFilter = () => {
     value: avoid.id,
   }));
 
-  const [value, setValue] = useState<string[]>([]);
-  const [value2, setValue2] = useState<string[]>([]);
-  const [value3, setValue3] = useState<string[]>([]);
-  const [value4, setValue4] = useState<string[]>([]);
-  const [value5, setValue5] = useState<string[]>([]);
+  const [value, setValue] = useState<string[]>([]); // Nhà mạng
+  const [value2, setValue2] = useState<string | undefined>(undefined); // Giá
+  const [value3, setValue3] = useState<string[]>([]); // Loại Sim
+  const [value4, setValue4] = useState<string| undefined>(undefined); // Đầu số
+  const [value5, setValue5] = useState<string| undefined>(undefined); // Tránh số
 
+  const router = useRouter();
   const selectProps: SelectProps<string[]> = {
+    mode: "multiple",
     style: { width: "100%" },
     value: value,
     options: networksOptions,
@@ -113,18 +116,20 @@ const DropdownFilter = () => {
     maxTagCount: "responsive",
     dropdownRender: (menu) => renderDropdown(menu, handleClear1),
   };
-  const selectProps2: SelectProps<string[]> = {
+  const selectProps2: SelectProps<string> = {
     style: { width: "100%" },
     value: value2,
     options: priceRangesOptions,
-    onChange: (newValue: string[]) => {
+    onChange: (newValue: string) => {
       setValue2(newValue);
+      handleSearch();
     },
     placeholder: "Khoảng giá",
     maxTagCount: "responsive",
     dropdownRender: (menu) => renderDropdown(menu, handleClear2),
   };
   const selectProps3: SelectProps<string[]> = {
+    mode: "multiple",
     style: { width: "100%" },
     value: value3,
     options: simsOptions,
@@ -135,23 +140,25 @@ const DropdownFilter = () => {
     maxTagCount: "responsive",
     dropdownRender: (menu) => renderDropdown(menu, handleClear3),
   };
-  const selectProps4: SelectProps<string[]> = {
+  const selectProps4: SelectProps<string> = {
     style: { width: "100%" },
     value: value4,
     options: prefixesOptions,
-    onChange: (newValue: string[]) => {
+    onChange: (newValue: string) => {
       setValue4(newValue);
+      handleSearch();
     },
     placeholder: "Đầu số",
     maxTagCount: "responsive",
     dropdownRender: (menu) => renderDropdown(menu, handleClear4),
   };
-  const selectProps5: SelectProps<string[]> = {
+  const selectProps5: SelectProps<string> = {
     style: { width: "100%" },
     value: value5,
     options: avoidsOptions,
-    onChange: (newValue: string[]) => {
+    onChange: (newValue: string) => {
       setValue5(newValue);
+      handleSearch();
     },
     placeholder: "Tránh số",
     maxTagCount: "responsive",
@@ -173,15 +180,45 @@ const DropdownFilter = () => {
   };
 
   const handleSearch = () => {
-    // Handle search logic
+    // Lấy value từ những cái trên => query dạng string &
+    // Gọi api với query string
+    // console.log(value);
+    let query = "";
+    if (value.length > 0) {
+      query += "supplier=" + value.join(",");
+    }
+    if (value2) {
+      query += "&priceRange=" + value2;
+    }
+    if (value3.length > 0) {
+      query += "&type=" + value3 + value.join(",");
+    }
+    if (value4) {
+      query += "&prefix=" + value4;
+    }
+    if (value5) {
+      query += "&avoidNumber=" + value5;
+    }
+    if (pointValue !== "") {
+      query += "&totalPoint=" + pointValue;
+    }
+    if (sumValue !== "") {
+      query += "&totalNode=" + sumValue;
+    }
+    console.log(query);
+    if(query)
+      router.push("?" + query);
+    else {
+      router.push("/")
+    }
   };
 
   const handleClear = () => {
     setValue([]);
-    setValue2([]);
+    setValue2("");
     setValue3([]);
-    setValue4([]);
-    setValue5([]);
+    setValue4("");
+    setValue5("");
     setPointValue("");
     setSumValue("");
   };
@@ -190,16 +227,16 @@ const DropdownFilter = () => {
     setValue([]);
   };
   const handleClear2 = () => {
-    setValue2([]);
+    setValue2(undefined);
   };
   const handleClear3 = () => {
     setValue3([]);
   };
   const handleClear4 = () => {
-    setValue4([]);
+    setValue4(undefined);
   };
   const handleClear5 = () => {
-    setValue5([]);
+    setValue5(undefined);
   };
   const handleClearPoint = () => {
     setPointValue("");
@@ -367,7 +404,7 @@ const DropdownFilter = () => {
       style={{
         backgroundColor: "#f9f9f9",
       }}
-      className = "flex items-start p-2 md:items-center"
+      className="flex items-start p-2 md:items-center"
     >
       <Dropdown overlay={menu} trigger={["click"]} placement="topLeft">
         <Button style={{ backgroundColor: "rgb(254, 209, 0)" }}>
@@ -381,13 +418,21 @@ const DropdownFilter = () => {
         }}
         className="flex overflow-auto md:overflow-visible gap-2 ml-1"
       >
-        <div className = "min-w-32">
+        <div className="min-w-32">
           <Select {...selectProps} />
         </div>
-        <div className = "min-w-32"><Select {...selectProps2} /></div>
-        <div className = "min-w-32"><Select {...selectProps3} /></div>
-        <div className = "min-w-32"><Select {...selectProps4} /></div>
-        <div className = "min-w-32"><Select {...selectProps5} /></div>
+        <div className="min-w-32">
+          <Select {...selectProps2} />
+        </div>
+        <div className="min-w-32">
+          <Select {...selectProps3} />
+        </div>
+        <div className="min-w-32">
+          <Select {...selectProps4} />
+        </div>
+        <div className="min-w-32">
+          <Select {...selectProps5} />
+        </div>
         <Dropdown overlay={dropdown1} trigger={["click"]}>
           <Button>Tổng điểm</Button>
         </Dropdown>

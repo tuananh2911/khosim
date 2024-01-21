@@ -11,19 +11,15 @@ import request from "@/api/request";
 
 interface DataTypeSim {
   stt?: number;
-  name: string;
+  number: string;
   price: number;
   point: number;
   supplier: string;
 }
 const columns: ColumnsType<DataTypeSim> = [
   {
-    title: "STT",
-    dataIndex: "stt",
-  },
-  {
     title: "Số sim",
-    dataIndex: "name",
+    dataIndex: "number",
     render: (row) => formatPhoneNumber(row),
   },
   {
@@ -42,7 +38,7 @@ const columns: ColumnsType<DataTypeSim> = [
   {
     title: "Mua Sim",
     render: (record) => (
-      <Link href={`/buy/${record.name}`}>
+      <Link href={`/buy/${record.id}`}>
         <Button
           type="primary"
           style={{ backgroundColor: "rgb(254,209,0)", color: "black" }}
@@ -53,53 +49,39 @@ const columns: ColumnsType<DataTypeSim> = [
     ),
   },
 ];
-const data: DataTypeSim[] = [
+const Data: DataTypeSim[] = [
   {
-    name: "0386105647",
+    number: "0386105647",
     price: 1000000,
     point: 80,
     supplier: "Viettel",
   },
   {
-    name: "0386105648",
+    number: "0386105648",
     price: 1000000,
     point: 80,
     supplier: "Mobifone",
   },
   {
-    name: "0386105648",
+    number: "0386105648",
     price: 1000000,
     point: 80,
     supplier: "Vinaphone",
   },
   {
-    name: "0386105648",
+    number: "0386105648",
     price: 1000000,
     point: 80,
     supplier: "Vietnamobile",
   },
   {
-    name: "0386105648",
+    number: "0386105648",
     price: 1000000,
     point: 80,
     supplier: "Gmobile",
   },
 ];
 
-const fetchData = () => {
-  // Simulated asynchronous data fetching
-  return new Promise<DataTypeSim[]>((resolve) => {
-    // Simulated API call or data retrieval process
-    setTimeout(() => {
-      const dataWithStt = data.map((item, index) => ({
-        ...item,
-        stt: index + 1,
-      }));
-
-      resolve(dataWithStt);
-    }, 500);
-  });
-};
 const ListDataMobile = (props: { data: DataTypeSim[]; loading: boolean }) => {
   const { data, loading } = props;
 
@@ -114,11 +96,11 @@ const ListDataMobile = (props: { data: DataTypeSim[]; loading: boolean }) => {
           {data.map((item, index) => {
             const avt =
               Icons[item.supplier.toLowerCase() as keyof typeof Icons];
-            const prefix = formatPhoneNumber(item.name).slice(0, 5);
-            const suffix = formatPhoneNumber(item.name).slice(5, 12);
+            const prefix = formatPhoneNumber(item.number).slice(0, 5);
+            const suffix = formatPhoneNumber(item.number).slice(5, 12);
             return (
               <Link
-                href={`/buy/${item.name}`}
+                href={`/buy/${item.number}`}
                 key={index}
                 className="flex items-center justify-between border bg-white rounded-md shadow-md p-2"
               >
@@ -140,24 +122,8 @@ const ListDataMobile = (props: { data: DataTypeSim[]; loading: boolean }) => {
     </div>
   );
 };
-const TableSim = () => {
-  const [data, setData] = React.useState<DataTypeSim[]>([]);
-  const [loading, setLoading] = React.useState<boolean>(true);
-
-
-  // const fetchData = async () => {
-  //   try{
-  //     const res = await request.get("sims")
-  //   }catch(error){
-  //
-  //   }
-  // }
-  React.useEffect(() => {
-    fetchData().then((result) => {
-      setData(result);
-      setLoading(false);
-    });
-  }, []);
+const TableSim = (props: any) => {
+  const {data = Data, isLoading = false} = props
   const pagination = {
     pageSize: 50,
   };
@@ -171,10 +137,10 @@ const TableSim = () => {
           columns={columns}
           dataSource={data}
           pagination={pagination}
-          loading={loading}
+          loading={isLoading}
         />
       </div>
-      <ListDataMobile data={data} loading={loading} />
+      <ListDataMobile data={data} loading={isLoading} />
     </>
   );
 };

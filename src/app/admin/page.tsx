@@ -5,11 +5,11 @@ import React, { useEffect, useState } from "react";
 import UploadSim from "./UploadSim";
 
 const Admin = () => {
-  const { setUser, user } = useInfoUser();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const token = localStorage.getItem('token')
   useEffect(() => {
-    if (!user || !user.isAdmin) window.location.href = "/login";
-  }, [user]);
+    if (!token) window.location.href = "/login";
+  }, [token]);
   return (
     <div className="flex justify-center flex-col items-center w-full min-h-[50vh]">
       <UploadSim isOpen={isOpen} setIsOpen={setIsOpen} />

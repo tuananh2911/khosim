@@ -24,7 +24,8 @@ interface Ward {
 }
 const plainOptions = ['Anh', 'Chị'];
 
-const OrderForm: React.FC = () => {
+const OrderForm: React.FC<any> = (props) => {
+    const {data} = props
     const [cities, setCities] = useState<City[]>([]);
     const [districts, setDistricts] = useState<District[]>([]);
     const [wards, setWards] = useState<Ward[]>([]);
@@ -205,7 +206,7 @@ const OrderForm: React.FC = () => {
                         </Select>
 
                         <Select
-                            className="form-select form-select-sm custom-select"
+                            className="form-select form-select-sm mb-3 custom-select"
                             defaultValue=""
                         >
                             <Option value="" disabled>

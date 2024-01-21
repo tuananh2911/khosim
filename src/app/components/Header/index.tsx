@@ -16,6 +16,7 @@ function HeaderComponent() {
   const handleSearch = (value: string) => {
     console.log("Search value:", value);
   };
+    const token = localStorage.getItem('token')
   const {user} = useInfoUser()
   return (
     <>
@@ -75,7 +76,7 @@ function HeaderComponent() {
               />
             <div className="w-[100px] flex items-center ml-2">
                 {
-                    user && user.isAdmin ? <Link className="text-white" href="/admin">Tải sim</Link> : <Link className="text-white"  href="/login">Đăng nhập</Link>
+                    token ? <Link className="text-white" href="/admin">Tải sim</Link> : <Link className="text-white"  href="/login">Đăng nhập</Link>
                 }
             </div>
 

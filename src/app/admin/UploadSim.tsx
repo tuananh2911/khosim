@@ -51,6 +51,8 @@ const TypeSim = [
   "Sim Ngũ Quý",
   "Sim Tứ Quý",
   "Sim Tam Hoa Kép",
+    "Sim Lục Quý Giữa",
+    "Sim Ngũ Quý Giữa"
 ];
 
 const UploadSim = (props: any) => {
@@ -79,7 +81,7 @@ const UploadSim = (props: any) => {
   const handleSubmit = async (data:any) => {
     setIsLoading(true);
     try{
-       await request.post("sims", {...data, numbers: data.numbers.split("/n")});
+       await request.post("sims/upload", {...data, numbers: data.numbers.split("\n"), price: Number(data.price)});
       message.success("Thành công")
       form.resetFields()
     }catch (error){

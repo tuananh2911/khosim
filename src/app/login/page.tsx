@@ -15,8 +15,8 @@ type FieldType = {
 };
 
 const LoginPage = () => {
-  const { setUser, user } = useInfoUser();
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const token = localStorage.getItem('token')
   const handleLogin = async (values: any) => {
     setIsLoading(true)
     try {
@@ -24,8 +24,8 @@ const LoginPage = () => {
         username: values.username,
         password: values.password,
       });
-      if (res.data.isAdmin) {
-        setUser({ isAdmin: true });
+      if (res.data.access_token) {
+        localStorage.setItem("token", res.data.access_token)
         message.success("Đăng nhập thành công")
       }
     } catch (err) {
@@ -35,8 +35,8 @@ const LoginPage = () => {
     setIsLoading(false)
   };
   useEffect(() => {
-    if (user && user.isAdmin) window.location.href = "/admin";
-  }, [user]);
+    if (token) window.location.href = "/admin";
+  }, [token]);
   return (
     <div className="flex justify-center min-h-[50vh] items-center ">
       <Form

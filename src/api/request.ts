@@ -7,9 +7,10 @@ const request = axios.create({
 
 request.interceptors.request.use(
   async (request) => {
-    // if (getToken()) {
-    //   request.headers.Authorization = "Bearer " + getToken();
-    // }
+      const token = localStorage.getItem("token")
+    if (token) {
+      request.headers.Authorization = "Bearer " + token;
+    }
     return request;
   },
   (error) => {
@@ -22,8 +23,9 @@ request.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === 401) {
-      // removeToken();
+    if (error?.response?.status === 401) {
+        localStorage.removeItem("token");
+        window.location.href = "/login"
     }
     return Promise.reject(error);
   }
