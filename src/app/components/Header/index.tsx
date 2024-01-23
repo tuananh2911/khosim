@@ -134,7 +134,8 @@ function HeaderComponent() {
                             fontSize: "16px",
                             }}
                         >
-                            SIM RẺ - SIM ĐẸP - SIM SIÊU ĐẸP
+                            GIAO SIM - KIỂM TRA - THANH TOÁN
+
                         </p>
                         </div>
                     </QueueAnim>

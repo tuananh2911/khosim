@@ -179,7 +179,7 @@ const OrderForm: React.FC<any> = (props) => {
                 <Form.Item label="Phương thức thanh toán">
                     <Radio.Group>
                         <Radio value="cash">Tiền mặt</Radio>
-                        <Radio value="card">Thẻ</Radio>
+                        <Radio value="card">Chuyển Khoản</Radio>
                     </Radio.Group>
                 </Form.Item>
                 <Form.Item label="Số tiền cần thanh toán">
