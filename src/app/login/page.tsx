@@ -20,13 +20,15 @@ const LoginPage = () => {
   const handleLogin = async (values: any) => {
     setIsLoading(true)
     try {
-      const res = await request.post("/user/login", {
+      const res = await request.post("http://114.29.238.20:5000/user/login", {
         username: values.username,
         password: values.password,
       });
       if (res.data.access_token) {
         localStorage.setItem("token", res.data.access_token)
         message.success("Đăng nhập thành công")
+      }else{
+        message.error("Đăng nhập thất bại")
       }
     } catch (err) {
       console.log(err);
@@ -63,7 +65,7 @@ const LoginPage = () => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit" loading={isLoading}>
+          <Button style={{ backgroundColor: '#008000', borderColor: '#008000', color: '#fff' }} htmlType="submit" loading={isLoading}>
             Đăng nhập
           </Button>
         </Form.Item>

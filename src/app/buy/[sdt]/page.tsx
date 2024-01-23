@@ -9,11 +9,12 @@ import request from "@/api/request";
 const SDT = ({params}: any) => {
   const key = params.sdt;
   const [data, setData] = useState<any>();
+
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const getSim = async () => {
       setIsLoading(true)
       try{
-        const res = await request.get(`/sims/${key}`)
+        const res = await request.get(`http://114.29.238.20:5000/sims/${key}`)
           setData(res.data)
       }catch(err){
 

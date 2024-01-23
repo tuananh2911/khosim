@@ -11,7 +11,7 @@ const BanSim = (props: any) => {
     return (
         <div style={{ margin: '8px 8px', padding: '20px', border: '1px solid #ccc', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
             <div className="section-item__title">
-                <Title level={3}>Đặt Mua Sim Số Đẹp 0798.99.3737</Title>
+                <Title level={3}>Đặt Mua Sim Số Đẹp {data.number}</Title>
             </div>
             <Divider />
             <div className="section-item__content">

@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} style={{ margin: "0" }}>
-        <script src="https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js" />
+        <script async src="https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js" />
         <StyledComponentsRegistry>
           <Layout className="layout">
             <Header />

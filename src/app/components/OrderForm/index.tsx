@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Form, Input, Button, Radio, type RadioChangeEvent } from 'antd';
 import { Typography, Divider, Tag, Select } from 'antd';
 import Link from 'next/link';
+import numberWithVND from "@/app/utils/numberwithvnd";
 const { Option } = Select;
 const { Title, Paragraph, Text } = Typography;
 interface City {
@@ -30,12 +31,13 @@ const OrderForm: React.FC<any> = (props) => {
     const [districts, setDistricts] = useState<District[]>([]);
     const [wards, setWards] = useState<Ward[]>([]);
     const [gender, setGender] = useState('Anh');
+    const [houseNumber, setHouseNumber] = useState('');
     const [formData, setFormData] = useState({
         name: '', // name input
         phoneNumber: '', // phone number input
         address: '', // address input
         paymentMethod: '', // payment method selection
-        totalAmount: 0, // total amount to display
+        totalAmount: data.price, // total amount to display
     });
     const onChange = ({ target: { value } }: RadioChangeEvent) => {
         setGender(value);
@@ -123,89 +125,15 @@ const OrderForm: React.FC<any> = (props) => {
                         className="form-control mb-3"
                     />
                 </div>
-                {/* <Form.Item label="Địa chỉ">
-                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                        <select
-                            className="form-select form-select-sm mb-3 custom-select"
-                            id="city"
-                            aria-label=".form-select-sm"
-                            onChange={handleCityChange}
-                        >
-                            <option value="" disabled selected>
-                                Chọn tỉnh thành
-                            </option>
-                            {cities.map(city => (
-                                <option key={city.Id} value={city.Id}>
-                                    {city.Name}
-                                </option>
-                            ))}
-                        </select>
-
-                        <select
-                            className="form-select form-select-sm mb-3 custom-select"
-                            id="district"
-                            aria-label=".form-select-sm"
-                            onChange={handleDistrictChange}
-                        >
-                            <option value="" disabled selected>
-                                Chọn quận huyện
-                            </option>
-                            {districts.map(district => (
-                                <option key={district.Id} value={district.Id}>
-                                    {district.Name}
-                                </option>
-                            ))}
-                        </select>
-
-                        <select
-                            className="form-select form-select-sm custom-select"
-                            id="ward"
-                            aria-label=".form-select-sm"
-                        >
-                            <option value="" disabled selected>
-                                Chọn phường xã
-                            </option>
-                            {wards.map(ward => (
-                                <option key={ward.Id} value={ward.Id}>
-                                    {ward.Name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                </Form.Item> */}
                 <Form.Item label="Địa chỉ">
                     <div className = "flex flex-col md:flex-row items-center gap-2">
-                        <Select
-                            className="form-select form-select-sm mb-3 custom-select"
-
-                            onChange={handleCityChange}
-                        >
-                            <Option value="" disabled>
-                                Chọn tỉnh thành
-                            </Option>
-                            {cities.map(city => (
-                                <Option key={city.Id} value={city.Id}>
-                                    {city.Name}
-                                </Option>
-                            ))}
-                        </Select>
-
-                        <Select
-                            className="form-select form-select-sm mb-3 custom-select"
-
-                            onChange={handleDistrictChange}
-                        >
-                            <Option value="" disabled>
-                                Chọn quận huyện
-                            </Option>
-                            {districts.map(district => (
-                                <Option key={district.Id} value={district.Id}>
-                                    {district.Name}
-                                </Option>
-                            ))}
-                        </Select>
-
-                        <Select
+                    <Input
+                                placeholder="Số nhà chi tiết"
+                                value={houseNumber}
+                                onChange={(e) => setHouseNumber(e.target.value)}
+                                className="form-control mb-3"
+                            />
+                            <Select
                             className="form-select form-select-sm mb-3 custom-select"
                             defaultValue=""
                         >
@@ -218,6 +146,34 @@ const OrderForm: React.FC<any> = (props) => {
                                 </Option>
                             ))}
                         </Select>
+                        <Select
+                            className="form-select form-select-sm mb-3 custom-select"
+                            defaultValue=""
+                            onChange={handleDistrictChange}
+                        >
+                            <Option value="" disabled>
+                                Chọn quận huyện
+                            </Option>
+                            {districts.map(district => (
+                                <Option key={district.Id} value={district.Id}>
+                                    {district.Name}
+                                </Option>
+                            ))}
+                        </Select>
+                        <Select
+                            className="form-select form-select-sm mb-3 custom-select"
+                            defaultValue=""
+                            onChange={handleCityChange}
+                        >
+                            <Option value="" disabled>
+                                Chọn tỉnh thành
+                            </Option>
+                            {cities.map(city => (
+                                <Option key={city.Id} value={city.Id}>
+                                    {city.Name}
+                                </Option>
+                            ))}
+                        </Select>
                     </div>
                 </Form.Item>
                 <Form.Item label="Phương thức thanh toán">
@@ -226,8 +182,8 @@ const OrderForm: React.FC<any> = (props) => {
                         <Radio value="card">Thẻ</Radio>
                     </Radio.Group>
                 </Form.Item>
-                <Form.Item label="Phương thức thanh toán">
-                    <p>Tổng tiền: {formData.totalAmount}</p>
+                <Form.Item label="Số tiền cần thanh toán">
+                    <div>Tổng tiền: {numberWithVND(data.price)}</div>
                 </Form.Item>
 
                 <Form.Item>

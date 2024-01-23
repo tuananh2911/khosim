@@ -2,13 +2,13 @@
 import { Avatar, Button } from "antd";
 import Table, { ColumnsType } from "antd/es/table";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { Spin } from "antd";
 import Icons from "../Icons";
 import numberWithVND from "@/app/utils/numberwithvnd";
 import { formatPhoneNumber } from "@/app/utils/string";
 import request from "@/api/request";
-
+import {useEffect} from "react";
 interface DataTypeSim {
   stt?: number;
   number: string;
@@ -38,7 +38,7 @@ const columns: ColumnsType<DataTypeSim> = [
   {
     title: "Mua Sim",
     render: (record) => (
-      <Link href={`/buy/${record.id}`}>
+      <Link href="/buy/[number]" as={`/buy/${record.number}`}>
         <Button
           type="primary"
           style={{ backgroundColor: "rgb(254,209,0)", color: "black" }}
@@ -48,6 +48,7 @@ const columns: ColumnsType<DataTypeSim> = [
       </Link>
     ),
   },
+  
 ];
 const Data: DataTypeSim[] = [
   {
@@ -123,10 +124,24 @@ const ListDataMobile = (props: { data: DataTypeSim[]; loading: boolean }) => {
   );
 };
 const TableSim = (props: any) => {
-  const {data = Data, isLoading = false} = props
-  const pagination = {
-    pageSize: 50,
+  const { data = Data, isLoading = false, page, setPage, totalSims } = props;
+  const [pageSize, setPageSize] = useState<number>(20);
+  const [totalPages, setTotalPages] = useState<number>(1); // Khởi tạo là 1 hoặc giá trị khác từ backend
+  const handlePageChange = (page: number, pageSize: number | undefined) => {
+    setPage(page);
+    setPageSize(pageSize || 20);
   };
+  const pagination = {
+    defaultPageSize: 20,
+    pageSize,
+    showSizeChanger: true,
+    pageSizeOptions: ['20'],
+    onChange: handlePageChange,
+    onShowSizeChange: handlePageChange,
+    current: page,
+    total: (totalSims/20) * pageSize, // Tổng số mục, giả định mỗi trang có pageSize mục
+  };
+
   return (
     <>
       <div
@@ -144,4 +159,5 @@ const TableSim = (props: any) => {
     </>
   );
 };
+
 export default TableSim;
