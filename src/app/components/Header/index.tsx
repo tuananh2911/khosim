@@ -17,7 +17,11 @@ function HeaderComponent() {
     const handleSearch = (value: string) => {
         console.log("Search value:", value);
     };
-    const token = localStorage.getItem('token')
+    let token ;
+    if (typeof window !== 'undefined') {
+        // Perform localStorage action
+        token = localStorage.getItem('token')
+    }
     const {user} = useInfoUser()
     return (
         <>
