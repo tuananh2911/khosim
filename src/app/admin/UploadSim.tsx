@@ -2,6 +2,7 @@ import { Button, Col, Form, Input, message, Row, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import TextArea from "antd/es/input/TextArea";
 import request from "@/api/request";
+import {BASE_API} from "@/constants/api";
 const Suppliers = [
   {
     label: "Viettel",
@@ -104,7 +105,7 @@ const UploadSim = (props: any) => {
         Authorization: `Bearer ${authToken}`,
         // Add other headers if needed
       };
-      await request.post("http://114.29.238.20:5000/sims/upload", {
+      await request.post(`http://${BASE_API}/sims/upload`, {
         ...data,
         numbers: data.numbers.split("\n"),
         price: Number(data.price),

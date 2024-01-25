@@ -95,7 +95,7 @@ const Footer = () => {
         </div>
       </div>
       <div className=" flex justify-between items-center flex-wrap mt-4 py-2 border-t border-gray-200 sm:px-16 ">
-        <p className="">&copy; 2024 CHỢ SIM GIÁ RẺ</p>
+        <p className="">&copy; 2024 SIM VIP GIÁ RẺ</p>
       </div>
     </footer>
   );

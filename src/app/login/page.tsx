@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {Button, Form, Input, message} from "antd";
 import request from "@/api/request";
 import { useInfoUser } from "@/hooks/useInfoUser";
+import {BASE_API} from "@/constants/api";
 
 const onFinish = (values: any) => {
   console.log("Success:", values);
@@ -20,7 +21,7 @@ const LoginPage = () => {
   const handleLogin = async (values: any) => {
     setIsLoading(true)
     try {
-      const res = await request.post("http://114.29.238.20:5000/user/login", {
+      const res = await request.post(`http://${BASE_API}/user/login`, {
         username: values.username,
         password: values.password,
       });

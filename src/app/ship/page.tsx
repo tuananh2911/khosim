@@ -2,9 +2,9 @@ import {Content} from "antd/es/layout/layout";
 import DropdownFilter from "@/app/components/Dropdown";
 import MenuDropdown from "@/app/components/MenuDropdown";
 import TableSim from "@/app/components/TableSim";
-import Introduction from "@/app/lienhe/introduction";
+import Introduction from "@/app/ship/introduction";
 
-const LienHe = () => {
+const Ship = () => {
     return (
         <>
             <Content>
@@ -20,4 +20,4 @@ const LienHe = () => {
     );
 }
 
-export default LienHe;
+export default Ship;

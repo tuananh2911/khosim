@@ -5,6 +5,7 @@ import DropdownFilter from "@/app/components/Dropdown";
 import MenuDropdown from "@/app/components/MenuDropdown";
 import React, {useEffect, useState} from "react";
 import request from "@/api/request";
+import {BASE_API} from "@/constants/api";
 
 const SDT = ({params}: any) => {
   const key = params.sdt;
@@ -14,7 +15,7 @@ const SDT = ({params}: any) => {
   const getSim = async () => {
       setIsLoading(true)
       try{
-        const res = await request.get(`http://114.29.238.20:5000/sims/${key}`)
+        const res = await request.get(`http://${BASE_API}/sims/${key}`)
           setData(res.data)
       }catch(err){
 

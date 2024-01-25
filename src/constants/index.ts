@@ -30,15 +30,15 @@ export const footerLinks = [
     {
         title: "Giới thiệu & hỗ trợ",
         links: [
-            { title: "Giới thiệu", url: "/" },
+            { title: "Giới thiệu", url: "/lienhe" },
             { title: "Liên hệ", url: "/lienhe" }
         ],
     },
     {
         title: "Chính sách bán hàng",
         links: [
-            { title: "Hình thức thanh toán", url: "/" },
-            { title: "Chính sách vận chuyển", url: "/" },
+            { title: "Hình thức thanh toán", url: "/payment" },
+            { title: "Chính sách vận chuyển", url: "/ship" },
         ],
     }
 ];

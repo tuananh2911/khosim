@@ -8,20 +8,21 @@
     </linearGradient>
   </defs>
 
-  <!-- Text M --><text x="0" y="45" font-family="Arial" font-size="40" fill="url(#textGradient)" font-weight="bold">C</text>
+  <!-- Text M --><text x="0" y="45" font-family="Arial" font-size="40" fill="url(#textGradient)" font-weight="bold">S
+</text>
 
   <!-- Text Y -->
-  <text x="28" y="45" font-family="Arial" font-size="40" fill="url(#textGradient)" font-weight="bold">H</text>
+  <text x="28" y="45" font-family="Arial" font-size="40" fill="url(#textGradient)" font-weight="bold">I</text>
 
   <!-- Text S (with a larger font-size, a darker fill color, and bold) -->
-  <text x="56" y="45" font-family="Arial" font-size="40" fill="url(#textGradient)" font-weight="bold">Ợ</text>
+  <text x="40" y="45" font-family="Arial" font-size="40" fill="url(#textGradient)" font-weight="bold">M</text>
 
-  <text x="90" y="45" font-family="Arial" font-size="40" fill="url(#textGradient)" font-weight="bold">S</text>
+  <text x="85" y="45" font-family="Arial" font-size="40" fill="url(#textGradient)" font-weight="bold">V</text>
 
   <!-- Text Y -->
-  <text x="115" y="45" font-family="Arial" font-size="40" fill="url(#textGradient)" font-weight="bold">I</text>
+  <text x="113" y="45" font-family="Arial" font-size="40" fill="url(#textGradient)" font-weight="bold">I</text>
 
   <!-- Text S (with a larger font-size, a darker fill color, and bold) -->
-  <text x="125" y="45" font-family="Arial" font-size="40" fill="url(#textGradient)" font-weight="bold">M</text>
+  <text x="125" y="45" font-family="Arial" font-size="40" fill="url(#textGradient)" font-weight="bold">P</text>
 </svg>
 
