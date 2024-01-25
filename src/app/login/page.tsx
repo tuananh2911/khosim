@@ -17,7 +17,11 @@ type FieldType = {
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const token = localStorage.getItem('token')
+  let token:any
+  if (typeof window !== 'undefined') {
+    // Perform localStorage action
+    token = localStorage.getItem('token')
+  }
   const handleLogin = async (values: any) => {
     setIsLoading(true)
     try {

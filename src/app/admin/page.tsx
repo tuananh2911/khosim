@@ -6,7 +6,12 @@ import UploadSim from "./UploadSim";
 
 const Admin = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const token = localStorage.getItem('token')
+
+  let token :any;
+  if (typeof window !== 'undefined') {
+    // Perform localStorage action
+    token = localStorage.getItem('token')
+  }
   useEffect(() => {
     if (!token) window.location.href = "/login";
   }, [token]);
