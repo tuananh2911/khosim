@@ -29,7 +29,7 @@ function HeaderComponent() {
                 style={{
                     width: "100%",
                     position: "relative",
-                    backgroundColor: "#9d2063",
+                    backgroundColor: "#7F2423",
                     display: "flex",
                     justifyContent: "center",
                 }}

@@ -10,7 +10,7 @@ export default {
   viettel: ViettelIcon,
   mobifone: MobilefoneIcon,
   vinaphone: VinaphoneIcon,
-  vietnamobile: VietnamobileIcon,
+  vietnammobile: VietnamobileIcon,
   gmobile: GmobileIcon,
   itelecom: ItelecomIcon,
   wintel: WintelIcon,

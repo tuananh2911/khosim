@@ -8,7 +8,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Kho Sim",
+  title: "Sim Vip Giá Rẻ",
   description: "",
 };
 
