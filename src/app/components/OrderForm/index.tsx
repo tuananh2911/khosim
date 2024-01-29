@@ -183,7 +183,7 @@ const OrderForm: React.FC<any> = (props) => {
                     </Radio.Group>
                 </Form.Item>
                 <Form.Item label="Số tiền cần thanh toán">
-                    <div>Tổng tiền: {numberWithVND(data.price)}</div>
+                    <div style={{display:'inline-flex'}} >Tổng tiền: <div className="font-bold text-base pl-2" >{numberWithVND(data.price)}</div></div>
                 </Form.Item>
 
                 <Form.Item>
@@ -203,7 +203,7 @@ const OrderForm: React.FC<any> = (props) => {
                         // You can adjust the color or other properties as needed
                         className="custom-button"
                     >
-                        Đặt hàng
+                        Đặt sim
                     </Button>
                 </Form.Item>
                 </div>
