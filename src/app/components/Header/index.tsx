@@ -8,7 +8,6 @@ import "./index.css";
 import {Fragment} from "react";
 import Image from "next/image";
 import {useInfoUser} from "@/hooks/useInfoUser";
-
 const {Text} = Typography;
 
 const {Header} = Layout;
