@@ -69,7 +69,7 @@ const Footer = () => {
                   <span style={{ color: "black" }}>0386105647</span>
                 </Button>
                 <Button
-                  href="https://zalo.me/3798100058065178012"
+                  href="https://zalo.me/0886394567"
                   size="large"
                   style={{
                     backgroundColor: "#0168fc",
@@ -86,7 +86,7 @@ const Footer = () => {
                     height={20}
                   ></Image>
                   <span style={{ color: "white", marginLeft: "10px" }}>
-                    0386105647
+                    0886.39.4567
                   </span>
                 </Button>
               </div>
