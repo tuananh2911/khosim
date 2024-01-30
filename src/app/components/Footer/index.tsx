@@ -66,7 +66,7 @@ const Footer = () => {
                     fontSize: "16px",
                   }}
                 >
-                  <span style={{ color: "black" }}>0386105647</span>
+                  <span style={{ color: "black" }}>0886.39.4567</span>
                 </Button>
                 <Button
                   href="https://zalo.me/0886394567"
