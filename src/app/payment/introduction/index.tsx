@@ -7,9 +7,9 @@ const Introduction = () => {
 
             <p className="text-gray-700 mb-4 font-bold">1. THANH TOÁN TIỀN MẶT</p>
 
-            <p className="text-gray-700 mb-4 ml-4">1.1 Tại siêu thị: Quý khách có thể đến mua hàng & thanh toán trực tiếp tại cửa hàng của khosim.com</p>
+            <p className="text-gray-700 mb-4 ml-4">1.1 Tại siêu thị: Quý khách có thể đến mua hàng & thanh toán trực tiếp tại cửa hàng của simvipgiare.com</p>
 
-            <p className="text-gray-700 mb-4 ml-4">1.2 Tại nhà/nơi nhận hàng (sim): Thanh toán cho nhân viên giao hàng trực tiếp của khosim.com tại bất kỳ đâu mà bạn yêu cầu khi giao hàng (sim).</p>
+            <p className="text-gray-700 mb-4 ml-4">1.2 Tại nhà/nơi nhận hàng (sim): Thanh toán cho nhân viên giao hàng trực tiếp của simvipgiare.com tại bất kỳ đâu mà bạn yêu cầu khi giao hàng (sim).</p>
 
             <p className="text-gray-700 mb-4 font-bold">2. THANH TOÁN CHUYỂN KHOẢN</p>
 
@@ -17,14 +17,14 @@ const Introduction = () => {
 
             <ul className="list-disc ml-8">
                 <li>Tên ngân hàng: Ngân hàng Thương mại Cổ phần Ngoại thương Việt Nam - Vietcombank</li>
-                <li>Chủ tài khoản: NGUYEN TRUNG NGUYEN</li>
-                <li>Số tài khoản: 9966666666</li>
-                <li>Nội dung: DH Mã đơn hàng - Số sim đặt mua (VD: DH686868 0911000888)</li>
+                <li>Chủ tài khoản: BUI TUAN KIET</li>
+                <li>Số tài khoản: 24.9999.6666</li>
+                <li>Nội dung: TÊN MUA HÀNG - Số sim đặt mua (VD: BUITUANKIET 0886394567)</li>
             </ul>
             <br/>
             <p className="text-gray-700 mb-4 font-bold">3. QUY ĐỊNH VỀ HOÀN TRẢ TIỀN</p>
 
-            <p className="text-gray-700 mb-4 ml-4">Trong trường hợp quý khách hàng đã mua hàng & thanh toán thành công nhưng dư tiền, hoặc đổi trả sim (chưa đăng ký thông tin), Kho Sim sẽ hoàn tiền qua hình thức chuyển khoản vào số tài khoản yêu cầu, hoặc tiền mặt tại địa chỉ giao hàng (sim).</p>
+            <p className="text-gray-700 mb-4 ml-4">Trong trường hợp quý khách hàng đã mua hàng & thanh toán thành công nhưng dư tiền, hoặc đổi trả sim (chưa đăng ký thông tin), Sim Vip sẽ hoàn tiền qua hình thức chuyển khoản vào số tài khoản yêu cầu, hoặc tiền mặt tại địa chỉ giao hàng (sim).</p>
         </div>
     );
 };
