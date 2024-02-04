@@ -105,7 +105,7 @@ const UploadSim = (props: any) => {
         Authorization: `Bearer ${authToken}`,
         // Add other headers if needed
       };
-      await request.post(`http://${BASE_API}/sims/upload`, {
+      await request.post(`https://${BASE_API}/sims/upload`, {
         ...data,
         numbers: data.numbers.split("\n"),
         price: Number(data.price),

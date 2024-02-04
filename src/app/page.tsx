@@ -31,7 +31,7 @@ export default  function  Home({params, searchParams} : any) {
             },
         };
         try {
-            const res = await request.post(`http://${BASE_API}/sims`, body);
+            const res = await request.post(`https://${BASE_API}/sims`, body);
             setData(res.data.sims);
             setTotalSims(res.data.total);
         } catch (error) {

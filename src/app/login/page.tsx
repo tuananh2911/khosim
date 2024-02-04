@@ -25,7 +25,7 @@ const LoginPage = () => {
   const handleLogin = async (values: any) => {
     setIsLoading(true)
     try {
-      const res = await request.post(`http://${BASE_API}/user/login`, {
+      const res = await request.post(`https://${BASE_API}/user/login`, {
         username: values.username,
         password: values.password,
       });

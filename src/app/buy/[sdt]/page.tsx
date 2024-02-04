@@ -15,7 +15,7 @@ const SDT = ({params}: any) => {
   const getSim = async () => {
       setIsLoading(true)
       try{
-        const res = await request.get(`http://${BASE_API}/sims/${key}`)
+        const res = await request.get(`https://${BASE_API}/sims/${key}`)
           setData(res.data)
       }catch(err){
 
