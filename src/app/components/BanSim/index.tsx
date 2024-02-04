@@ -7,7 +7,10 @@ import numberWithVND from "@/app/utils/numberwithvnd";
 const { Title, Paragraph, Text } = Typography;
 
 const BanSim = (props: any) => {
-    const {data} = props
+    const {data} = props;
+    const isTraSau = data.subcribsionType === "Trả sau";
+    console.log('data', data)
+    console.log('isTraSau', isTraSau)
     return (
         <div style={{ margin: '8px 8px', padding: '20px', border: '1px solid #ccc', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
             <div className="section-item__title">
@@ -16,12 +19,34 @@ const BanSim = (props: any) => {
             <Divider />
             <div className="section-item__content">
                 <div className="booking__info-box">
+                    <div className="row booking__info" style={{ display: 'flex', alignItems: 'center' }}>
+                        <div style={{ marginRight: '10px' }}>
+                            <Text className="col-4 col-label" strong>Kiểu thuê bao:</Text>
+                        </div>
+                        <div>
+                            <Text className="col-6 prod-number" strong style={{ fontWeight: 'bold', fontSize: '16px', color: 'black' }}>{data.subcribsionType}</Text>
+                        </div>
+                        {/* Render additional tags if the type is "trả sau" */}
+
+                    </div>
+                    {isTraSau && (
+                    <>
+                        <div style={{ marginRight: '10px' }}>
+                            <Text className="col-4 col-label" strong>Cam kết:</Text>
+                        </div>
+                        <div>
+                            <Text className="col-6 prod-number" strong style={{ fontWeight: 'bold', fontSize: '16px', color: 'black' }}>{data.other.commitment}</Text>
+                        </div>
+
+                    </>
+                )}
                     <div className="row" style={{ display: 'flex', flexWrap: 'wrap', marginBottom: '10px', width: '100%' }}>
                         <div className="col col-left col-7" style={{ paddingRight: '15px', width: '100%' }}>
                             <div className="row booking__info" style={{ display: 'flex', alignItems: 'center' }}>
                                 <div style={{ marginRight: '10px' }}>
                                     <Text className="col-4 col-label" strong>Số thuê bao:</Text>
                                 </div>
+
                                 <div >
                                     <Text className="col-6 prod-number" strong style={{ fontWeight: 'bold', fontSize: '24px', color: 'red' }}>{data.number}</Text>
                                 </div>
