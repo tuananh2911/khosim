@@ -6,12 +6,6 @@ import { Layout } from "antd";
 import { Footer } from "./components";
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Sim Vip Giá Rẻ",
-  description: "",
-};
-
 export default function RootLayout({
   children,
 }: {

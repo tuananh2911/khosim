@@ -8,13 +8,25 @@ import "./index.css";
 import {Fragment} from "react";
 import Image from "next/image";
 import {useInfoUser} from "@/hooks/useInfoUser";
+import { useRouter } from "next/navigation";
 const {Text} = Typography;
 
 const {Header} = Layout;
 
 function HeaderComponent() {
+    const router = useRouter();
     const handleSearch = (value: string) => {
-        console.log("Search value:", value);
+
+        let query = "";
+        if (value.length > 0) {
+            query += "numberPhone=" + value;
+        }
+        console.log(query);
+        if(query)
+            router.push("?" + query);
+        else {
+            router.push("/")
+        }
     };
     let token ;
     if (typeof window !== 'undefined') {

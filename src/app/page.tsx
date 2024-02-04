@@ -4,17 +4,26 @@ import { Content } from "antd/es/layout/layout";
 import MenuDropdown from "./components/MenuDropdown";
 import TableSim from "./components/TableSim";
 import request from "@/api/request";
-import { useParams } from "next/navigation";
+import { useSearchParams } from 'next/navigation'
 import {useEffect, useState} from "react";
 import {BASE_API} from "@/constants/api";
 
-export default  function  Home({params, searchParams} : any) {
+export default  function  Home(props: any) {
+    // const params  = props.params;
+    // const searchParams = props.searchParams;
+    const params = useSearchParams()
+
+    const queries = Array.from(params.keys());
+    let searchParams: any = {};
+    console.log('queries', queries)
+    queries.forEach((query) => {
+        searchParams[query] = params.get(query);
+    });
     const [page, setPage] = useState<number>(1);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [totalSims, setTotalSims] = useState<any>();
     const [data, setData] = useState<any[]>([]);
     const [mobilePage, setMobilePage] = useState<number>(1);
-
     const fetchData = async (currentPage: number) => {
         setIsLoading(true);
         const body = {
@@ -42,7 +51,7 @@ export default  function  Home({params, searchParams} : any) {
 
     useEffect(() => {
         fetchData(page);
-    }, [searchParams, page]);
+    }, [params, page]);
 
     const handleMobileLoadMore = () => {
         // Increment the mobile page when "Load More" is clicked
