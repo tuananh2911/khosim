@@ -1,1 +1,1 @@
-export const BASE_API ='149.50.213.237:8443';
+export const BASE_API ='simvipgiare.com:8443';
