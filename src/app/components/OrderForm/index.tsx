@@ -1,10 +1,12 @@
 "use client"
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import axios from 'axios';
-import { Form, Input, Button, Radio, type RadioChangeEvent } from 'antd';
+import {Form, Input, Button, Radio, type RadioChangeEvent, message} from 'antd';
 import { Typography, Divider, Tag, Select } from 'antd';
 import Link from 'next/link';
 import numberWithVND from "@/app/utils/numberwithvnd";
+import request from "@/api/request";
+import {BASE_API} from "@/constants/api";
 const { Option } = Select;
 const { Title, Paragraph, Text } = Typography;
 interface City {
@@ -26,18 +28,26 @@ interface Ward {
 const plainOptions = ['Anh', 'Chị'];
 
 const OrderForm: React.FC<any> = (props) => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const {data} = props
     const [cities, setCities] = useState<City[]>([]);
     const [districts, setDistricts] = useState<District[]>([]);
     const [wards, setWards] = useState<Ward[]>([]);
     const [gender, setGender] = useState('Anh');
     const [houseNumber, setHouseNumber] = useState('');
+    const [methodPay,setMethodPay]= useState('');
+    const [city, setCity] = useState('');
+    const [district, setDistrict] = useState('');
+    const [ward, setWard] = useState('');
     const [formData, setFormData] = useState({
         name: '', // name input
-        phoneNumber: '', // phone number input
+        numberCustomer: '', // phone number input
+        sex:'',
+        require:'',
+        methodPay:'',
+        typeSim:'',
         address: '', // address input
-        paymentMethod: '', // payment method selection
-        totalAmount: data.price, // total amount to display
+        totalPrice: data.price, // total amount to display
     });
     const onChange = ({ target: { value } }: RadioChangeEvent) => {
         setGender(value);
@@ -54,19 +64,11 @@ const OrderForm: React.FC<any> = (props) => {
 
         fetchData();
     }, []);
-
-    // const handleCityChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    //     const selectedCityId = e.target.value;
-    //     const selectedCity = cities.find(city => city.Id === selectedCityId);
-
-    //     if (selectedCity) {
-    //         setDistricts(selectedCity.Districts || []);
-    //         setWards([]); // Reset danh sách phường/xã khi chọn lại tỉnh/thành phố
-    //     }
-    // };
     const handleCityChange = (value: string) => {
-        const selectedCity = cities.find(city => city.Id === value);
 
+        const selectedCity:any = cities.find(city => city.Id === value);
+        console.log('city', selectedCity)
+        setCity(selectedCity.Name);
         if (selectedCity) {
             setDistricts(selectedCity.Districts || []);
             setWards([]); // Reset danh sách phường/xã khi chọn lại tỉnh/thành phố
@@ -74,24 +76,42 @@ const OrderForm: React.FC<any> = (props) => {
     };
 
     const handleDistrictChange = (value: string) => {
-        const selectedDistrict = districts.find(district => district.Id === value);
-
+        const selectedDistrict:any = districts.find(district => district.Id === value);
+        setDistrict(selectedDistrict.Name);
         if (selectedDistrict) {
             setWards(selectedDistrict.Wards || []);
         }
     };
-
+    const handleWardChange = (value: string) => {
+        const selectedWard:any = wards.find(ward => ward.Id === value);
+        setWard(selectedWard.Name);
+    };
     const handleInputChange = (key: string, value: string) => {
-        setFormData({
-            ...formData,
+        setFormData((prevData) => ({
+            ...prevData,
             [key]: value,
-        });
+            address: `${houseNumber}, ${wards.join(', ')}, ${districts.join(', ')}, ${cities.join(', ')}`,
+        }));
     };
 
-    const handleBuyNow = () => {
+    const handleBuyNow = async () => {
         // Logic to handle the "Buy Now" action with the form data
-        console.log('Buy Now clicked:', formData);
-        // Add logic to process the purchase or perform necessary actions
+
+
+        formData.address = `${houseNumber}, ${ward}, ${district}, ${city}`;
+        formData.sex = gender;
+        formData.methodPay = methodPay; console.log('Buy Now clicked:', formData);
+        formData.typeSim = data.type;
+        setIsLoading(true)
+        try {
+            const res = await request.post(`https://${BASE_API}/sims/${data.id}/buy`, formData);
+            if (res.data) {
+                message.success("Đặt sim thành công")}
+        } catch (err) {
+            console.log(err);
+            message.success("Đặt sim thất bại")
+        }
+        setIsLoading(false)
     };
     return (
         <div style={{ margin: '8px 0 8px 8px', padding: '20px', border: '1px solid #ccc', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' }}>
@@ -106,12 +126,13 @@ const OrderForm: React.FC<any> = (props) => {
 
             >
                 <div className = "p-4">
-                <Radio.Group className="mb-2">
-                    <Radio value="cash">Anh</Radio>
-                    <Radio value="card">Chị</Radio>
-                </Radio.Group>
+                    <Radio.Group className="mb-2" onChange={onChange} value={gender}>
+                        <Radio value="Anh">Anh</Radio>
+                        <Radio value="Chị">Chị</Radio>
+                    </Radio.Group>
 
-                <div className = "flex flex-col md:flex-row gap-2">
+
+                    <div className = "flex flex-col md:flex-row gap-2">
                     <Input
                         placeholder="Họ và Tên *"
                         value={formData.name}
@@ -120,32 +141,28 @@ const OrderForm: React.FC<any> = (props) => {
                     />
                     <Input
                         placeholder="Số điện thoại *"
-                        value={formData.phoneNumber}
-                        onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
+                        value={formData.numberCustomer}
+                        onChange={(e) => handleInputChange('numberCustomer', e.target.value)}
                         className="form-control mb-3"
                     />
                 </div>
                 <Form.Item label="Địa chỉ">
                     <div className = "flex flex-col md:flex-row items-center gap-2">
-                    <Input
-                                placeholder="Số nhà chi tiết"
-                                value={houseNumber}
-                                onChange={(e) => setHouseNumber(e.target.value)}
-                                className="form-control mb-3"
-                            />
-                            <Select
+                        <Select
                             className="form-select form-select-sm mb-3 custom-select"
                             defaultValue=""
+                            onSelect={handleCityChange}
                         >
                             <Option value="" disabled>
-                                Chọn phường xã
+                                Chọn tỉnh thành
                             </Option>
-                            {wards.map(ward => (
-                                <Option key={ward.Id} value={ward.Id}>
-                                    {ward.Name}
+                            {cities.map(city => (
+                                <Option key={city.Id} value={city.Id}>
+                                    {city.Name}
                                 </Option>
                             ))}
                         </Select>
+
                         <Select
                             className="form-select form-select-sm mb-3 custom-select"
                             defaultValue=""
@@ -163,26 +180,33 @@ const OrderForm: React.FC<any> = (props) => {
                         <Select
                             className="form-select form-select-sm mb-3 custom-select"
                             defaultValue=""
-                            onChange={handleCityChange}
+                            onChange={handleWardChange}
                         >
                             <Option value="" disabled>
-                                Chọn tỉnh thành
+                                Chọn phường xã
                             </Option>
-                            {cities.map(city => (
-                                <Option key={city.Id} value={city.Id}>
-                                    {city.Name}
+                            {wards.map(ward => (
+                                <Option key={ward.Id} value={ward.Id}>
+                                    {ward.Name}
                                 </Option>
                             ))}
                         </Select>
+                        <Input
+                            placeholder="Số nhà chi tiết"
+                            value={houseNumber}
+                            onChange={(e) => setHouseNumber(e.target.value)}
+                            className="form-control mb-3"
+                        />
                     </div>
                 </Form.Item>
-                <Form.Item label="Phương thức thanh toán">
-                    <Radio.Group>
-                        <Radio value="cash">Tiền mặt</Radio>
-                        <Radio value="card">Chuyển Khoản</Radio>
-                    </Radio.Group>
-                </Form.Item>
-                <Form.Item label="Số tiền cần thanh toán">
+                    <Form.Item label="Phương thức thanh toán">
+                        <Radio.Group onChange={(e) => setMethodPay(e.target.value)} value={methodPay}>
+                            <Radio value="Tiền mặt">Tiền mặt</Radio>
+                            <Radio value="Chuyển khoản">Chuyển Khoản</Radio>
+                        </Radio.Group>
+                    </Form.Item>
+
+                    <Form.Item label="Số tiền cần thanh toán">
                     <div style={{display:'inline-flex'}} >Tổng tiền: <div className="font-bold text-base pl-2" >{numberWithVND(data.price)}</div></div>
                 </Form.Item>
 
