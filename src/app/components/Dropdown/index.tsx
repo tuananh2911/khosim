@@ -37,25 +37,43 @@ const DropdownFilter = () => {
   ];
 
   const priceRanges = [
-    { id: "0-500000", title: "Dưới 500 nghìn" },
-    { id: "500000-1000000", title: "Từ 500 - 1 triệu" },
-    { id: "1000000-3000000", title: "Từ 1 - 3 triệu" },
-    { id: "3000000-5000000", title: "Từ 3 - 5 triệu" },
-    { id: "5000000-10000000", title: "Từ 5 - 10 triệu" },
-    { id: "10000000-50000000", title: "Từ 10 - 50 triệu" },
-    { id: "50000000-100000000", title: "Từ 50 - 100 triệu" },
-    { id: "100000000-200000000", title: "Từ 100 - 200 triệu" },
-    { id: "200000000-500000000", title: "Từ 200 - 500 triệu" },
-    { id: "500000000-0", title: "Trên 500 triệu" },
+    { id: "0,500000", title: "Dưới 500 nghìn" },
+    { id: "500000,1000000", title: "Từ 500 - 1 triệu" },
+    { id: "1000000,3000000", title: "Từ 1 - 3 triệu" },
+    { id: "3000000,5000000", title: "Từ 3 - 5 triệu" },
+    { id: "5000000,10000000", title: "Từ 5 - 10 triệu" },
+    { id: "10000000,50000000", title: "Từ 10 - 50 triệu" },
+    { id: "50000000,100000000", title: "Từ 50 - 100 triệu" },
+    { id: "100000000,200000000", title: "Từ 100 - 200 triệu" },
+    { id: "200000000,500000000", title: "Từ 200 - 500 triệu" },
+    { id: "500000000,900000000", title: "Trên 500 triệu" },
   ];
 
   const sims = [
-    { id: "Lục Quý", title: "Lục Quý" },
-    { id: "Ngũ Quý", title: "Ngũ Quý" },
-    { id: "Tứ Quý", title: "Tứ Quý" },
-    { id: "Tam Hoa Kép", title: "Tam Hoa Kép" },
-    { id: "Lục Quý Giữa", title: "Lục Quý Giữa" },
-    { id: "Ngũ Quý Giữa", title: "Ngũ Quý Giữa" },
+    { id: "Sim Lục Quý", title: "Sim Lục Quý" },
+    { id: "Sim Ngũ Quý", title: "Sim Ngũ Quý" },
+    { id: "Sim Tứ Quý", title: "Sim Tứ Quý" },
+    { id: "Sim Tam Hoa Kép", title: "Sim Tam Hoa Kép" },
+    { id: "Sim Lục Quý Giữa", title: "Sim Lục Quý Giữa" },
+    { id: "Sim Tam Hoa", title: "Sim Tam Hoa" },
+    { id: "Sim Ngũ Quý Giữa", title: "Sim Ngũ Quý Giữa" },
+    { id: "Sim Taxi", title: "Sim Taxi" },
+    { id: "Sim Lặp", title: "Sim Lặp" },
+    { id: "Sim Kép", title: "Sim Kép" },
+    { id: "Sim Gánh Đảo", title: "Sim Gánh Đảo" },
+    { id: "Sim Số Tiến", title: "Sim Số Tiến" },
+    { id: "Sim Tiến Đôi", title: "Sim Tiến Đôi" },
+    { id: "Sim Tiến Kép", title: "Sim Tiến Kép" },
+    { id: "Sim Tứ Qúy Giữa", title: "Sim Tứ Qúy Giữa" },
+    { id: "Sim Số Độc", title: "Sim Số Độc" },
+    { id: "Sim Năm Sinh", title: "Sim Năm Sinh" },
+    { id: "Sim Lộc Phát", title: "Sim Lộc Phát" },
+    { id: "Sim Thần Tài", title: "Sim Thần Tài" },
+    { id: "Sim Ông Địa", title: "Sim Ông Địa" },
+    { id: "Sim Đại Cát", title: "Sim Đại Cát" },
+    { id: "Sim Đặc Biệt", title: "Sim Đặc Biệt" },
+    { id: "Sim Tự Chọn", title: "Sim Tự Chọn" },
+    { id: "Sim Dễ Nhớ", title: "Sim Dễ Nhớ" },
   ];
 
   const avoids = [
@@ -188,7 +206,8 @@ const DropdownFilter = () => {
       query += "supplier=" + value.join(",");
     }
     if (value2) {
-      query += "&priceRange=" + value2;
+      const arrayPrice = value2.split(",");
+      query += "&priceRange=" + arrayPrice;
     }
     if (value3.length > 0) {
       query += "&type=" + value3 + value.join(",");
